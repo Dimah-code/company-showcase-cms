@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+}
+<header id="header" class="header-transparent header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}">
+    <div class="header-body border-top-0 bg-dark box-shadow-none">
+        <div class="header-container container container-xl">
+            <div class="header-row">
+                <div class="header-column">
+                    <div class="header-row">
+                        <div class="header-logo editable" id="img-1">
+                            <a href="/Home/Index">
+                                <img alt="@ViewBag.alt" width="82" height="40" src="~/assets/img/gallery/@ViewBag.logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-column justify-content-end">
+                    <div class="header-row">
+                        <div class="header-nav header-nav-links header-nav-dropdowns-dark header-nav-light-text order-2 order-lg-1">
+                            <div class="header-nav-main header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                <nav class="collapse">
+                                    <ul class="nav nav-pills" id="mainNav">
+                                        <li class="dropdown">
+                                            <a class="dropdown-item editable" id="text-1" href="/Home/Index">
+                                                @ViewBag.home
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown dropdown-mega">
+                                            <a class="dropdown-item dropdown-toggle editable" id="text-2" href="/Home/About">
+                                                @ViewBag.about
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle editable" id="text-3" href="/Home/Projects">
+                                                @ViewBag.projects
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle editable" id="text-4" href="/Home/Contact">
+                                                @ViewBag.contact
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle editable" id="text-5" href="/Home/Team">
+                                                @ViewBag.team
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle editable" id="text-6" href="/Home/Blogs">
+                                                @ViewBag.blog
+                                            </a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                                زبان/Language
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="@Url.Action("SetLanguage", "Home", new { language = "en" })">English</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("SetLanguage", "Home", new { language = "fa" })">فارسی</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,130 @@
+﻿@model PortoWeb.Models.GeneralViewModel
+
+@{
+    ViewBag.Title = "BlogDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = ViewBag.lang;
+    var texts = PortoWeb.Models.LanguageTexts.Texts[lang];
+}
+<div role="main" class="main">
+
+    <section class="page-header page-header-modern page-header-background page-header-background-md overlay overlay-color-dark overlay-show overlay-op-7" style="background-image: url(~/assets/img/page-header/page-header-about-us.jpg);">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="text-9 font-weight-bold">@Model.blogDetail.bName</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-4">
+
+        <div class="row">
+            <div class="col">
+                <div class="blog-posts single-post">
+
+                    <article class="post post-large blog-single-post border-0 m-0 p-0">
+
+                        <div class="post-image ml-0">
+                            <div class="lightbox" data-plugin-options="{'delegate': 'a', 'type': 'image', 'gallery': {'enabled': true}, 'mainClass': 'mfp-with-zoom', 'zoom': {'enabled': true, 'duration': 300}}">
+                                <div class="row mx-0">
+                                    @foreach (var item in Model.blogImages)
+                                    {
+                                        <div class="col-6 col-md-4 p-0">
+                                            <a href="~/assets/img/blog/@item.bpUrl">
+                                                <span class="thumb-info thumb-info-no-borders thumb-info-centered-icons">
+                                                    <span class="thumb-info-wrapper">
+                                                        <img src="~/assets/img/blog/@item.bpUrl" class="img-fluid" alt="عکس از بلاگ @Model.blogDetail.bName">
+                                                        <span class="thumb-info-action">
+                                                            <span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fas fa-plus text-dark"></i></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                            string persianDate = Model.blogDetail.bCreatedAt;
+                            var dateParts = persianDate.Split('/');
+                            var year = dateParts[0];
+                            var month = dateParts[1];
+                            var day = dateParts[2];
+
+                            string[] persianMonths = ViewBag.PersianMonths;
+                            string persianMonth = persianMonths[int.Parse(month) - 1];
+                        }
+                        <div class="post-date ml-0">
+
+                            <span class="day">@day</span>
+                            <span class="month">@persianMonth</span>
+                            <span class="year">@year</span>
+                        </div>
+
+                        <div class="post-content ml-0">
+
+                            <h2 class="font-weight-bold mt-n3 mb-2 pb-1 pt-1 line-height-7 text-7"><a href="/Home/BlogDetail/@Model.blogDetail.bID">@Model.blogDetail.bTitle</a></h2>
+
+                            <div class="post-meta">
+                                <span><i class="far fa-user"></i> @texts["Writer"]  <a href="#">@Model.blogDetail.tNameFamily</a> </span>
+                                <span><i class="far fa-folder"></i> <a href="#">@(lang == "fa" ? Model.blogDetail.bcName : Model.blogDetail.bcNameEn)</a></span>
+                            </div>
+                            @Html.Raw(Model.blogDetail.bContent)
+                            <div class="post-block mt-5 post-share">
+                                <h4 class="mb-3 secondary-font">@texts["Keywords"] : </h4>
+                                <p>@Model.blogDetail.bKeywords</p>
+                            </div>
+
+                            <div class="post-block mt-4 pt-2 post-author">
+                                <h4 class="mb-3 secondary-font pb-1">@texts["Writer"]</h4>
+                                <div class="img-thumbnail img-thumbnail-no-borders d-block pb-3">
+                                    <a href="blog-post.html">
+                                        <img src="~/assets/img/team/@Model.blogDetail.tPhoto" alt="عکس نویسنده بلاگ : @Model.blogDetail.tNameFamily">
+                                    </a>
+                                </div>
+                                <p><strong class="name"><a href="#" class="text-4 pb-1 d-block">@Model.blogDetail.tNameFamily</a></strong></p>
+                                <p>@Model.blogDetail.tTitle</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="section section-height-3 bg-color-grey m-0 border-0 appear-animation animated fadeIn appear-animation-visible" data-appear-animation="fadeIn" data-plugin-options="{'accY': -150}" style="animation-delay: 100ms;">
+        <div class="container py-4">
+            <h4 class="mb-4 text-4"><strong class="font-weight-extra-bold">@texts["Related Posts"]</strong></h4>
+            <div class="row">
+                @foreach (var item in ViewBag.fourBlogs)
+                {
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="portfolio-item">
+                            <a href="/Home/BlogDetail/@item.bID">
+                                <span class="thumb-info thumb-info-lighten thumb-info-no-borders border-radius-0">
+                                    <span class="thumb-info-wrapper border-radius-0">
+                                        <img src="~/assets/img/blog/@item.bMainPic" class="img-fluid border-radius-0" alt="عکس اصلی بلاگ @item.bName">
+                                        <span class="thumb-info-title">
+                                            <span class="thumb-info-inner">@item.bName</span>
+                                            <span class="thumb-info-type">@(lang == "fa" ? item.bcName : item.bcNameEn)</span>
+                                        </span>
+                                        <span class="thumb-info-action">
+                                            <span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+
+</div>

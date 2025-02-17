@@ -1,0 +1,73 @@
+﻿<script>
+        $(document).ready(function () {
+            $("#MessageToAdminForm").on("submit", function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Get the form element and create FormData from it
+                let form = $(this)[0];
+                let formdata = new FormData(form);
+
+                $.ajax({
+                    url: "/Admin/SendMessage",
+                    type: "POST",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        // Check the response and display SweetAlert2 alert
+                        if (response.success) {
+                            if (response.lang === 'en') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Message sent successfully!',
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    window.location.reload(); // Reload page after user clicks OK
+                                });
+                            } else if (response.lang === 'fa') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'عملیات موفق',
+                                    text: 'پیام با موفقیت ارسال شد!',
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    window.location.reload(); // Reload page after user clicks باشه
+                                });
+                            }
+                        } else {
+                            if (response.lang === 'en') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Failed to send message. Find another way to connect with the company.',
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    window.location.reload(); // Reload page after user clicks OK
+                                });
+                            } else if (response.lang === 'fa') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطا',
+                                    text: 'ارسال پیام با مشکل مواجه شد. لطفا راه دیگری برای ارتباط با شرکت پیدا کنید',
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    window.location.reload(); // Reload page after user clicks باشه
+                                });
+                            }
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred while sending the message.',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.reload(); // Reload page after user clicks OK
+                        });
+                    }
+                });
+            });
+        });
+</script>

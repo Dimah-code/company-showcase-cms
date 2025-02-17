@@ -1,0 +1,52 @@
+﻿@model PortoWeb.Models.GeneralViewModel
+@{
+    Layout = null;
+    var lang = ViewBag.Language;
+    var texts = PortoWeb.Models.LanguageTexts.Texts[lang];
+}
+
+<footer id="footer">
+        <div class="container">
+            <div class="footer-ribbon">
+               
+            </div>
+            <div class="row py-5 my-4">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0 pb-2 pb-lg-0">
+                    <h5 class="text-3 mb-3">@texts["Stay with us"]</h5>
+                    <p class="pr-1"></p>
+                    <div class="alert alert-success d-none" id="newsletterSuccess">
+                        
+                    </div>
+                    <div class="alert alert-danger d-none" id="newsletterError"></div>
+                    
+                        <div class="input-group input-group-rounded">
+                                <a class="btn btn-light text-color-dark" href="/Home/contact"><strong>@texts["Ways of communication with us"]</strong></a>
+                        </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 pb-2 pb-lg-0">
+                    <h5 class="text-3 mb-3"></h5>
+                    <div id="tweet" class="twitter mb-2" data-plugin-tweets data-plugin-options="{'username': 'rtltheme', 'count': 2}">
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0 pb-2 pb-md-0">
+                    <div class="contact-details">
+                        <h5 class="text-3 mb-3">@texts["Contact us"]</h5>
+                        <ul class="list list-icons list-icons-lg mb-2">
+                            <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i><p class="m-0">@ViewBag.address</p></li>
+                            <li class="mb-1"><i class="fab fa-whatsapp text-color-primary"></i><p class="m-0"><a href="tel:8001234567" class="ltr-text">@Model.siteinfo.sitePhone</a></p></li>
+                            <li class="mb-1"><i class="far fa-envelope text-color-primary"></i><p class="m-0"><a href="@Model.siteinfo.siteEmail" target="_blank">@Model.siteinfo.siteEmail</a></p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <h5 class="text-3 mb-3 pb-1">@texts["Follow us"]</h5>
+                    <ul class="social-icons">
+                        <li class="social-icons-youtube"><a href="@Model.siteinfo.siteYT" target="_blank" title="یوتوب"><i class="fab fa-youtube"></i></a></li>
+                        <li class="social-icons-linkedin"><a href="@Model.siteinfo.siteLinkedin" target="_blank" title="لینکدین"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li class="social-icons-instagram"><a href="@Model.siteinfo.siteInstagram" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>

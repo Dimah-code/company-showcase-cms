@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+<section class="section section-height-3 bg-color-grey-scale-1 m-0 border-0">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 pb-sm-4 pb-lg-0 pr-lg-5 mb-sm-5 mb-lg-0">
+                <h2 class="text-color-dark font-weight-normal text-6 mb-2 editable" id="text-35">
+                    <strong class="font-weight-extra-bold">
+                        @ViewBag.abtTitle
+                    </strong>
+                </h2>
+                <p class="pr-5 mr-5 editable" id="text-36">@ViewBag.abtParag</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="~/assets/img/gallery/@ViewBag.AboutPhoto"
+                     class="img-fluid rounded appear-animation editable"
+                     data-appear-animation="expandIn"
+                     id="img-3"
+                     data-appear-animation-delay="300"
+                     alt="@ViewBag.AboutAlt"
+                     style="max-width: 100%; height: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+</section>

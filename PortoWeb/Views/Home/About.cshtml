@@ -1,0 +1,38 @@
+﻿@model PortoWeb.Models.GeneralViewModel
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div role="main" class="main">
+    @{
+        Html.RenderAction("_SubBanner", "Component", new { id = 1 });
+    }
+    <div class="container">
+
+        <div class="row pt-5">
+            <div class="col">
+                @{
+                    Html.RenderAction("_AboutTitle", "Component");
+                }
+                @{
+                    Html.RenderAction("_3Slogan", "Component");
+                }
+
+            </div>
+        </div>
+
+    </div>
+    @{
+        Html.RenderAction("_Counter", "Component");
+    }
+    @{
+        Html.RenderAction("_AboutUs", "Component");
+    }
+    @{
+        Html.RenderAction("_MessageToAdmin", "Component");
+    }
+</div>
+@section HomeScripts{
+    @Html.Partial("_SendMessageScript");
+}

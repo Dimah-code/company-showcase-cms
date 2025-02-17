@@ -1,0 +1,28 @@
+﻿@model PortoWeb.Models.GeneralViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div role="main" class="main">
+    @{ 
+        Html.RenderAction("_banner", "Component");
+    }
+    
+    @{ 
+        Html.RenderAction("_homeabout", "Component");
+    }
+
+   @{ 
+       Html.RenderAction("_ProjTeamLink", "Component");
+   }
+
+
+
+    <hr>
+    @{ 
+        Html.RenderAction("_indexBottom", "Component");
+    }
+    <hr>
+
+</div>

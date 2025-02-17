@@ -1,0 +1,382 @@
+﻿@model PortoWeb.Models.Table_Members
+@{
+    ViewBag.Title = "ProfilePage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>پروفایل</h1>
+
+</div><!-- End Page Title -->
+
+<section class="section profile">
+    <div class="row">
+        <div class="col-xl-4">
+
+            <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                    <img src="~/Aassets/img/AdminProfile/@Model.Mpic" alt="Profile" class="rounded-circle">
+                    <h2>@Model.MnameFamily</h2>
+                    <h3>@Model.Mrole</h3>
+                    <div class="social-links mt-2">
+                        <a href="@Model.Minstagram" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="@Model.Mlinkedin" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">نگاه کلی</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">ویرایش پروفایل</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">ویرایش رمز ورود</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <h5 class="card-title">درباره من</h5>
+                            <p class="small fst-italic">@Model.Mdes</p>
+
+                            <h5 class="card-title">جزئیات پروفایل</h5>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">نام کامل</div>
+                                <div class="col-lg-9 col-md-8">@Model.MnameFamily</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">وظیفه</div>
+                                <div class="col-lg-9 col-md-8">@Model.Mrole</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">شماره تلفن</div>
+                                <div class="col-lg-9 col-md-8">@Model.Mphone</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">ایمیل</div>
+                                <div class="col-lg-9 col-md-8">@Model.Memail</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                            <!-- Profile Edit Form -->
+                            <form id="editProfileForm" method="post" enctype="multipart/form-data" action="/Admin/EditProfile">
+                                <div class="row mb-3">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">عکس پروفایل</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img src="~/Aassets/img/AdminProfile/@Model.Mpic" alt="@Model.MnameFamily" />
+                                        <div class="pt-2">
+                                            <input name="ProfilePic" type="file" class="form-control" id="ProfilePic" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">نام کامل</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="MnameFamily" type="text" class="form-control" id="FullName" value="@Model.MnameFamily" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="about" class="col-md-4 col-lg-3 col-form-label">درباره من</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <textarea name="Mdes" class="form-control" id="About" style="height: 100px">@Model.Mdes</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Job" class="col-md-4 col-lg-3 col-form-label">وظیفه</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="Mrole" type="text" class="form-control" id="Role" value="@Model.Mrole" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">شماره تلفن</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="Mphone" type="text" class="form-control" id="Phone" value="@Model.Mphone" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">ایمیل</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="Memail" type="email" class="form-control" id="Email" value="@Model.Memail" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">لینک اینستاگرام</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="Minstagram" type="text" class="form-control" id="Instagram" value="@Model.Minstagram" dir="ltr" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">لینک لینکدین</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="Mlinkedin" type="text" class="form-control" id="Linkedin" value="@Model.Mlinkedin" dir="ltr" />
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" id="editProfile" class="btn btn-primary">ثبت اطلاعات</button>
+                                </div>
+                            </form>
+                            <!-- End Profile Edit Form -->
+
+                        </div>
+
+
+
+                        <div class="tab-pane fade pt-3" id="profile-change-password">
+                            <!-- Change Password Form -->
+                            <form id="changePasswordForm">
+                                <div class="row mb-3">
+                                    <label for="currentUser" class="col-md-4 col-lg-3 col-form-label">نام کاربری فعلی <span class="ql-color-red">(الزامی)</span></label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="username" type="text" class="form-control" id="currentUser" dir="ltr">
+                                        <span id="username_validation_msg" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="newUser" class="col-md-4 col-lg-3 col-form-label">نام کاربری جدید</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="username" type="text" class="form-control" id="newUser" dir="ltr">
+                                        <span id="new_username_validation_msg" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">رمز عبور فعلی</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="password" type="password" class="form-control" id="currentPassword" dir="ltr">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">رمز عبور جدید</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="password" type="password" class="form-control" id="newPassword" dir="ltr">
+                                        <span id="password_validation_msg" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">تکرار رمز عبور جدید</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="renewpassword" type="password" class="form-control" id="renewPassword" dir="ltr">
+                                        <span id="repassword_validation_msg" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="button" id="changePasswordBtn" class="btn btn-primary">ثبت اطلاعات</button>
+                                </div>
+                                <br />
+                                <div>
+                                    <h6><a id="forgetPasswordLink" href="/Admin/ForgotPassword">رمز عبور خود را فراموش کرده اید؟ اینجا کلیک کنید!</a></h6>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Validation patterns
+            const usernamePattern = /^(?=.*[A-Z]).{12,}$/; // At least 12 chars, one uppercase
+            const passwordPattern = /^(?=.*\d).{8,}$/; // At least 8 chars, one number
+
+            // Validate New Username
+            $('#newUser').on('input', function () {
+                const newUsername = $(this).val().trim();
+                const msg = $('#new_username_validation_msg');
+
+                if (newUsername.length > 0 && !usernamePattern.test(newUsername)) {
+                    msg.text("نام کاریری باید 12 کاراکتر طول و دارای یک حرف بزرگ باشد");
+                } else {
+                    msg.text(""); // Clear message
+                }
+            });
+
+            // Validate New Password
+            $('#newPassword, #renewPassword').on('input', function () {
+                const newPassword = $('#newPassword').val().trim();
+                const reNewPassword = $('#renewPassword').val().trim();
+                const msg = $('#password_validation_msg');
+
+                if (!passwordPattern.test(newPassword)) {
+                    msg.text("رمز عبور باید حداقل 8 کاراکتر و دارای یک عدد باشد");
+                } else if (reNewPassword !== newPassword) {
+                    msg.text("رمز عبور با تکرار ان همخوانی ندارد");
+                } else {
+                    msg.text(""); // Clear message
+                }
+            });
+
+            // Submit Button Click
+            $('#changePasswordBtn').on('click', function (e) {
+                showSpinner();
+                e.preventDefault();
+
+                const currentUsername = $('#currentUser').val().trim();
+                const currentPassword = $('#currentPassword').val().trim();
+                const newUsername = $('#newUser').val().trim();
+                const newPassword = $('#newPassword').val().trim();
+                const reNewPassword = $('#renewPassword').val().trim();
+
+                // Validation messages
+                const usernameMsg = $('#new_username_validation_msg');
+                const passwordMsg = $('#password_validation_msg');
+                const repasswordMsg = $('#repassword_validation_msg');
+                // Final validation checks
+                if (!currentUsername || !currentPassword) {
+                    hideSpinner();
+                    swal("Error", "لطفا نام کاریری و رمز عبور خود را وارد کنید", "error");
+                    return;
+                }
+
+                if (newUsername.length > 0 && !usernamePattern.test(newUsername)) {
+                    hideSpinner();
+                    usernameMsg.text("نام کاریری باید حداقل 12 کاراکتر و دارای یک حرف یزرگ باشد");
+                    return;
+                }
+
+                if (!passwordPattern.test(newPassword)) {
+                    hideSpinner();
+                    passwordMsg.text("رمز عبور باید حداقل 8 کاراکتر و دارای یک عدد باشد");
+                    return;
+                }
+
+                if (newPassword !== reNewPassword) {
+                    hideSpinner();
+                    repasswordMsg.text("رمز عبور با تکرار ان همخوانی ندارد");
+                    return;
+                }
+
+                // AJAX call to validate current credentials and update
+                $.ajax({
+                    url: '/Admin/ChangePassword',
+                    type: 'POST',
+                    data: {
+                        currentUsername: currentUsername,
+                        currentPassword: currentPassword,
+                        newUsername: newUsername, // Can be empty
+                        newPassword: newPassword
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات موفق',
+                                text: 'مقادیر مورد نظر به روززسانی شد',
+                                icon: 'success',
+                                confirmButtonText: 'باشه'
+                            }).then(() => {
+                                location.reload(); // Reload page after success
+                            });
+                        } else {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات ناموفق',
+                                text: response.message || 'ناموفق در به روزرسانی مقادیر مورد نظر',
+                                icon: 'error',
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            title: 'خطا از سمت سرور',
+                            text: 'خطا از سمت سرور میباشد لطفا دوباره تلاش کنید',
+                            icon: 'error',
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                });
+            });
+
+        // CHANGE PROFILE DETAILS 
+
+
+            $('#editProfileForm').on('submit', function (e) {
+                showSpinner();
+
+                e.preventDefault();
+
+                // Create a FormData object to handle file uploads and text fields
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: '/Admin/EditProfile',
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // Required for FormData
+                    contentType: false, // Required for FormData
+                    success: function (response) {
+                        if (response.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات موفق',                          text: 'پروفایل شما با موفقیت به روزرسانی شد',
+                                icon: 'success',
+                                text: response.message,
+                                confirmButtonText: 'باشه'
+                            }).then(() => location.reload()); // Optionally reload the page
+                        } else {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات ناموفق',
+                                text: response.message || 'ناموفق در به روزرسانی پروفایل',
+                                icon: 'error',
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'خطا از سمت سرور لطفا دوباره تلاش کنید',
+                            icon: 'error',
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                });
+            });
+        });
+       
+    </script>
+}
+

@@ -1,0 +1,220 @@
+﻿
+@{
+    ViewBag.Title = "AddMember";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">اضافه کردن عضو جدید</h5>
+            <div class="text-right">
+                <a href="/Team/TeamList" class="btn btn-secondary">بازگشت</a>
+            </div>
+            <br />
+            <br />
+            <form id="AddNewMemberForm" enctype="multipart/form-data" method="POST">
+
+                <!-- Product Name -->
+                <div class="mb-3">
+                    <label for="productName" class="form-label">نام و نام‌خانوادگی :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="MemberName"
+                           name="memberName"
+                           required
+                           maxlength="60"
+                           placeholder="نام و نام‌خانوادگی را وارد کنید">
+                </div>
+
+                <!-- Upload Member Photo -->
+                <div class="mb-3">
+                    <label for="mainPhoto" class="form-label">بارگذاری عکس :</label>
+                    <input type="file"
+                           class="form-control"
+                           id="MemberPhoto"
+                           name="memberPhoto"
+                           accept="image/*"
+                           required>
+                    <div class="invalid-feedback">لطفاً یک عکس اصلی برای پروژه آپلود کنید. حداکثر حجم عکس 4 مگابایت میباشد.</div>
+                </div>
+
+                <!-- preview photo -->
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img src="#" alt="Profile" class="rounded-circle" id="previewImage" style="height:10rem;width:10rem">
+                    </div>
+                </div>
+
+                <!-- Title Member -->
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">یک توضیح کوتاه :</label>
+                    <textarea class="form-control"
+                              id="MemberTitle"
+                              name="memberTitle"
+                              required
+                              maxlength="70"
+                              style="height: 89px;"
+                              placeholder="توضیحات کوتاه را وارد کنید. حداکثر 70 کاراکتر"></textarea>
+                </div>
+
+                <!-- Description Member -->
+                <div class="mb-3">
+                    <label for="memberDes" class="form-label">توضیحات تکمیلی :</label>
+                    <textarea class="form-control"
+                              id="MemberDes"
+                              name="memberDes"
+                              required
+                              maxlength="400"
+                              style="height: 120px;"
+                              placeholder="توضیحات تکمیلی را وارد کنید. حداکثر 400 کاراکتر"></textarea>
+                </div>
+
+                <!-- roles -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">عنوان شغلی : <a href="/Team/Roles" class="small">مدیریت عناوین شغلی</a></label>
+                    <select class="form-select" id="MemeberRole" name="memberRole">
+                        @foreach (var item in ViewBag.role)
+                        {
+                            <option value="@item.rID">@item.pkRole / @item.roleDes</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Language -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">زبان ارائه :</label>
+                    <select class="form-select" id="lang" name="lang">
+                        <option value="fa">فارسی</option>
+                        <option value="en">انگلیسی</option>
+                    </select>
+                </div>
+
+                <!-- Skills -->
+                <div class="mb-3">
+                    <label for="Skill" class="form-label">4 مهارت برتر :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="Skill1"
+                           name="skill1"
+                           maxlength="30"
+                           placeholder="مهارت اول را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill2"
+                           name="skill2"
+                           maxlength="30"
+                           placeholder="مهارت دوم را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill3"
+                           name="skill3"
+                           maxlength="30"
+                           placeholder="مهارت سوم را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill4"
+                           name="skill4"
+                           maxlength="30"
+                           placeholder="مهارت چهارم را وارد کنید">
+                </div>
+                <br />
+                <p class="text-danger text-center">لینک هارا به صورت کامل وارد کنید <i class="bx bx-error"></i></p>
+                <div class="row mb-3">
+                    <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">لینک اینستاگرام</label>
+                    <div class="col-md-8 col-lg-9">
+                        <input name="memberInstagram" type="text" class="form-control" id="Instagram" dir="ltr" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">لینک لینکدین</label>
+                    <div class="col-md-8 col-lg-9">
+                        <input name="memberLinkedin" type="text" class="form-control" id="Linkedin" dir="ltr" />
+                    </div>
+                </div>
+                <br />
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="SaveButton" class="btn btn-primary w-100">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script>// JavaScript to show preview of uploaded image
+    const memberPhotoInput = document.getElementById("MemberPhoto");
+    const previewImage = document.getElementById("previewImage");
+
+    memberPhotoInput.addEventListener("change", function(event) {
+        const file = event.target.files[0];
+
+        // Check if the file is an image
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            // On load, set the image source to the file and display it
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = "block";
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            // Hide the preview image if no valid image is selected
+            previewImage.style.display = "none";
+        }
+    });
+    $(document).ready(function () {
+        $("#AddNewMemberForm").on("submit", function (e) {
+            showSpinner();
+            e.preventDefault();
+            const lang = $("#lang").val();
+            let form = $("#AddNewMemberForm");
+            let formdata = new FormData(form[0]);
+            $.ajax({
+                url: "/Team/AddMemberPost",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات موفق",
+                            icon: "success",
+                            text: response.message,
+                            confirmButtonText: "باشه"
+                        }).then(() => {
+                            let url = lang == "fa" ? "/Team/TeamList" : "/Team/TeamListEn";
+                            window.location.href = url;
+                        });
+                    }
+                    else {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "خطا",
+                            icon: "error",
+                            text: response.message,
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                },
+                error: function () {
+                    hideSpinner();
+                    Swal.fire({
+                        title: "خطا",
+                        icon: "error",
+                        text: "خطا در برقراری ارتباط با سرور",
+                        confirmButtonText: "باشه"
+                    });
+                }
+            });
+
+        });
+
+    });
+
+    </script>
+}

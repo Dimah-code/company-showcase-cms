@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "EditPage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">ویرایش اطلاعات</h5>
+            <div class="text-right">
+                <a href="/pages/pageslist" class="btn btn-secondary">بازگشت</a>
+            </div>
+            <br />
+            <br />
+            <form id="EditPageForm" method="POST">
+
+                <!-- Page Name -->
+                <div class="mb-3">
+                    <label for="pageName" class="form-label">نام صفحه :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="PageName"
+                           name="pageName"
+                           value="@ViewBag.page.pageName"
+                           required
+                           maxlength="60"
+                           placeholder="نام صفحه را وارد کنید">
+                </div>
+
+                <!-- Page Title -->
+                <div class="mb-3">
+                    <label for="pageDescription" class="form-label">تایتل صفحه :</label>
+                    <textarea class="form-control"
+                              id="PageTitle"
+                              name="pageTitle"
+                              required
+                              maxlength="100"
+                              style="height: 89px;"
+                              placeholder="توضیحات کوتاه را وارد کنید. حداکثر 100 کاراکتر">@ViewBag.page.pageTitle</textarea>
+                </div>
+
+                <!-- Description Page -->
+                <div class="mb-3">
+                    <label for="pageDes" class="form-label">توضیحات صفحه :</label>
+                    <textarea class="form-control"
+                              id="PageDes"
+                              name="pageDes"
+                              required
+                              maxlength="400"
+                              style="height: 120px;"
+                              placeholder="توضیحات صفحه را وارد کنید. حداکثر 400 کاراکتر">@ViewBag.page.pageDes</textarea>
+                </div>
+
+                <!-- Page's Keywords -->
+                <div class="mb-3">
+                    <label for="pageDes" class="form-label">کلمات کلیدی صفحه :</label>
+                    <textarea class="form-control"
+                              id="PageKeywords"
+                              name="pageKeywords"
+                              required
+                              maxlength="300"
+                              style="height: 120px;"
+                              placeholder="توضیحات صفحه را وارد کنید. حداکثر 300 کاراکتر">@ViewBag.page.pageKeywords</textarea>
+                </div>
+                <input type="text" name="pageID" value="@ViewBag.page.pageID" style="display:none" />
+
+                <br />
+                <!-- Save Button -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="SaveButton" class="btn btn-primary w-100">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#EditPageForm").on("submit", function (e) {
+                showSpinner();
+                e.preventDefault();
+                let form = $("#EditPageForm")[0];
+                let formdata = new FormData(form);
+                for (let [key, value] of formdata.entries()) {
+                    console.log(`${key} : ${value}`);
+                }
+                $.ajax({
+                    url: "/Pages/EditPagePost",
+                    type: "POST",
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                title: "عملیات موفق",
+                                icon: "success",
+                                text: response.message,
+                                confirmButtonText: "باشه"
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        }
+                        else {
+                            hideSpinner();
+                            Swal.fire({
+                                title: "خطا",
+                                icon: "error",
+                                text: response.message,
+                                confirmButtonText: "باشه"
+                            });
+                        }
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "خطا",
+                            icon: "error",
+                            text: "خطا در برقراری ارتباط با سرور",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+}

@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+            <div class="row">
+
+                <!-- Sales Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
+
+                        <div class="card-body">
+                            <h5 class="card-title"> نمونه‌کارها <span> | درکل</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-boxes"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@ViewBag.projectCounter</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Sales Card -->
+                <!-- Revenue Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card revenue-card">
+
+                        <div class="card-body">
+                            <h5 class="card-title"> اعضای تیم <span> | درکل</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@ViewBag.teamCounter</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Revenue Card -->
+                <!-- Customers Card -->
+                <div class="col-xxl-4 col-xl-12">
+
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title"> پست‌ها <span> | درکل</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-book-half"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@ViewBag.blogCounter</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- End Customers Card -->
+                <!-- Recent Sales -->
+                <div class="col-12">
+                    <div class="card recent-sales overflow-auto">
+
+                        <div class="card-body">
+                            <h5 class="card-title">نمونه کارها</h5>
+
+                            <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                                <div class="datatable-top">
+
+                                </div>
+                                <div class="datatable-container">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <p>شناسه</p>
+                                                </th>
+                                                <th scope="col">
+                                                    <p>نام محصول</p>
+                                                </th>
+                                                <th scope="col">
+                                                    <p>مشتری</p>
+                                                </th>
+                                                <th scope="col">
+                                                    <p>دسته‌بندی</p>
+                                                </th>
+                                                <th scope="col">
+                                                    <p>تاریخ</p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.projects)
+                                            {
+                                                <tr>
+                                                    <td scope="row">
+                                                        @item.pID
+                                                    </td>
+                                                    <td>
+                                                        @item.pName
+                                                    </td>
+                                                    <td>
+                                                        @item.pClient
+                                                    </td>
+                                                    <td>
+                                                        @item.Cname
+                                                    </td>
+                                                    <td class="green">
+                                                        @item.DoneDate
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Recent Sales -->
+                <!-- Top Selling -->
+                <div class="col-12">
+                    <div class="card top-selling overflow-auto">
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">پست ها</h5>
+
+                            <table class="table table-bordered border-5">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">عکس شاخص</th>
+                                        <th scope="col">نام پست</th>
+                                        <th scope="col">دسته‌بندی</th>
+                                        <th scope="col">نویسنده</th>
+                                        <th scope="col">تاریخ انتشار</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.blogs)
+                                    {
+                                        <tr>
+                                            <th scope="row">
+                                            <a href="#">
+                                                <img src="~/assets/img/blog/@item.bMainPic">
+                                                </a>
+                                            </th>
+                                            <td>
+                                                @item.bName
+                                            </td>
+                                            <td>
+                                            @item.bcName
+                                            </td>
+                                            <td>
+                                                @item.tNameFamily
+                                            </td>
+                                            <td>@item.bCreatedAt</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Top Selling -->
+
+            </div>
+        </div><!-- End Left side columns -->
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+            <!-- Recent Activity -->
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">پیام ها</h5>
+
+                    <div class="activity">
+                        <div class="text-center">
+                            <a href="/Messages/MessagesList" class="fw-bold text-dark btn btn-outline-success small-1" style="font-size:10px;">مشاهده پیام‌ها</a>
+                        </div>
+                        <br />
+                        @foreach (var item in ViewBag.messages)
+                        {
+                            <div class="activity-item d-flex">
+
+                                <div class="activite-label">شناسه: @item.pkID</div>
+                                <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                                <div class="activity-content">
+                                    <p>نام فرستنده: @item.name </p>
+                                </div>
+                            </div><!-- End activity item-->
+                        }
+                    </div>
+
+                </div>
+            </div><!-- End Recent Activity -->
+        </div><!-- End Right side columns -->
+    </div>
+</section>

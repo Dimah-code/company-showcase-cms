@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection || انتخاب زبان</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212; /* Dark background */
+            color: #f0f0f0; /* Light text color */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .language-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+
+        .language-option {
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+            .language-option:hover {
+                transform: scale(1.05);
+                box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.3);
+            }
+
+            .language-option img {
+                border-radius: 8px;
+                width: 150px;
+            }
+
+            .language-option h3 {
+                margin-top: 15px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="text-center">
+        <h2 class="display-4">Select Your Language</h2>
+        <h2 class="display-4">زبان خود را انتخاب کنید</h2>
+        <div class="language-container mt-5">
+
+            <!-- English Option -->
+            <div class="language-option">
+                <a href="/Home/SetLanguage?language=en"class="text-decoration-none">
+                    <img src="~/assets/img/Languages/Flag_of_the_United_Kingdom.svg"
+                         alt="Flag of United Kingdom | پرچم انگلستان">
+                </a>
+                <h3 class="mt-2">English</h3>
+            </div>
+
+            <!-- Persian Option -->
+            <div class="language-option">
+                <a href="/Home/SetLanguage?language=fa" class="text-decoration-none">
+                    <img src="~/assets/img/Languages/Flag_of_Iran.svg"
+                         alt="Flag of Iran | پرچم ایران">
+                </a>
+                <h3 class="mt-2">فارسی</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

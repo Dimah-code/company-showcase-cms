@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+
+<section class="section bg-color-grey-scale-1 section-height-3 border-0 m-0">
+    <div class="container container-xl py-3">
+        <div class="row">
+            <div class="col text-center">
+                <h2 id="text-16" class="font-weight-normal mb-5 editable">
+                    <strong class="font-weight-extra-bold">
+                        @ViewBag.Tproj
+                    </strong>
+                </h2>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+
+                <div class="owl-carousel owl-theme nav-style-1 stage-margin mb-0 owl-rtl owl-loaded " data-plugin-options="{'responsive': {'576': {'items': 1}, '768': {'items': 2}, '992': {'items': 3}, '1200': {'items': 4}}, 'margin': 3, 'loop': true, 'nav': false, 'dots': false,'autoplay': false,  'mouseDrag': false, 'touchDrag': false ,'stagePadding': 40}" style="height: auto;">
+
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(1299px, 0px, 0px); transition: all; width: 5276px; padding-left: 40px; padding-right: 40px;">
+                            @foreach (var item in ViewBag.projects)
+                            {
+                                <div class="owl-item cloned" style="width: 430px; margin-left: 3px;">
+                                    <div class="m-3">
+                                        <div class="hover-effect-3d" style="perspective: 1000px; transform-style: preserve-3d;">
+                                            <div class="thumb-info thumb-info-hide-wrapper-bg thumb-info-no-zoom rounded-0" style="perspective: 1000px; transform-style: preserve-3d; transform: rotateX(0deg) rotateY(0deg);">
+                                                <div class="thumb-info-wrapper">
+                                                    <img src="~/assets/img/projects/@item.pMainPic" class="img-fluid rounded-0 hover-effect-2" alt="عکس از پروژه @item.pName">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a href="/Home/Projects" id="text-17" class="btn btn-primary font-weight-semibold text-3 px-5 btn-py-2 editable">@ViewBag.btnCproj</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-color-grey-scale-1 section-height-3 border-0 m-0">
+    <div class="container container-xl py-3">
+        <div class="row">
+            <div class="col text-center">
+                <h2 id="text-18" class="font-weight-normal mb-5 editable">
+                    <strong class="font-weight-extra-bold">
+                        @ViewBag.Tteam
+                    </strong>
+                </h2>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+
+                <div class="owl-carousel owl-theme nav-style-1 stage-margin mb-0 owl-rtl owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'responsive': {'576': {'items': 1}, '768': {'items': 2}, '992': {'items': 3}, '1200': {'items': 4}}, 'margin': 3, 'loop': true, 'nav': false, 'dots': false,'autoplay': false,  'mouseDrag': false, 'touchDrag': false , 'stagePadding': 40}" style="height: auto;">
+
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(1299px, 0px, 0px); transition: all; width: 5276px; padding-left: 40px; padding-right: 40px;">
+                            @foreach (var item in ViewBag.team)
+                            {
+                                <div class="owl-item cloned" style="width: 430px; margin-left: 3px;">
+                                    <div class="m-3">
+                                        <div class="hover-effect-3d" style="perspective: 1000px; transform-style: preserve-3d;">
+                                            <div class="thumb-info thumb-info-hide-wrapper-bg thumb-info-no-zoom rounded-0" style="perspective: 1000px; transform-style: preserve-3d; transform: rotateX(0deg) rotateY(0deg);">
+                                                <div class="thumb-info-wrapper">
+                                                    <img src="~/assets/img/team/@item.tPhoto" class="img-fluid rounded-0 hover-effect-2" alt="عکس از پروژه @item.tNameFamily">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a href="/Home/Team" id="text-19" class="btn btn-primary font-weight-semibold text-3 px-5 btn-py-2 editable">@ViewBag.btnCteam</a>
+            </div>
+        </div>
+    </div>
+</section>

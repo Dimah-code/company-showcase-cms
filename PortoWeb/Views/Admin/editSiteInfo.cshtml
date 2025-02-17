@@ -1,0 +1,170 @@
+﻿@model PortoWeb.Models.Table_siteInfo
+@{
+    ViewBag.Title = "editSiteInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ویرایش اطلاعات عمومی سایت</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-5" method="post" action="/Admin/editInfo">
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" maxlength="60" class="form-control" id="siteName" name="siteName" value="@Model.siteName" placeholder="اسم شرکت">
+                                    <label for="floatingName">اسم شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="floatingName">فاوایکن سایت:</label>
+                                <div class="form-floating">
+                                    <input type="file" class="form-control" id="favicon" name="favicon">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" maxlength="400" class="form-control" id="siteAddress" name="address" value="@Model.address" placeholder="اسم شرکت">
+                                    <label for="floatingName">آدرس شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" maxlength="80" id="siteTimework" name="timeWork" value="@Model.timeWork" placeholder="اسم شرکت">
+                                    <label for="floatingName">ساعت کاری شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" maxlength="19" id="sitePhone" name="sitePhone" value="@Model.sitePhone" placeholder="اسم شرکت">
+                                    <label for="floatingName">شماره تلفن شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" maxlength="180" id="siteEmail" name="siteEmail" value="@Model.siteEmail" placeholder="اسم شرکت">
+                                    <label for="floatingName">ایمیل شرکت:</label>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="custom-color-red">لینک های زیر را به صورت کامل وارد کنید *الزامی</h6>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control" id="siteGooglemap" name="googleMap" value="@Model.googleMap" placeholder="اسم شرکت">
+                                    <label for="floatingName">لینک گوگل مپ:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control" maxlength="198" id="siteInstagram" name="siteInstagram" value="@Model.siteInstagram" placeholder="اسم شرکت">
+                                    <label for="floatingName">لینک اینستاگرام شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control" maxlength="198" id="siteYoutube" name="siteYT" value="@Model.siteYT" placeholder="اسم شرکت">
+                                    <label for="floatingName">لینک یوتوب:</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control" maxlength="198" id="siteLinkedin" name="siteLinkedin" value="@Model.siteLinkedin" placeholder="اسم شرکت">
+                                    <label for="floatingName">لینک لینکدین شرکت:</label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" id="ty" class="btn btn-primary">ذخیره</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#ty").on('click', function (e) {
+                showSpinner();
+                e.preventDefault();
+
+                let fileInput = $('#favicon')[0].files[0];
+
+                // ✅ Use FormData instead of a regular object
+                var formData = new FormData();
+                formData.append("siteName", $("#siteName").val().trim());
+                formData.append("address", $("#siteAddress").val().trim());
+                formData.append("timeWork", $("#siteTimework").val().trim());
+                formData.append("sitePhone", $("#sitePhone").val().trim());
+                formData.append("siteEmail", $("#siteEmail").val().trim());
+                formData.append("googleMap", $("#siteGooglemap").val().trim());
+                formData.append("siteInstagram", $("#siteInstagram").val().trim());
+                formData.append("siteYT", $("#siteYoutube").val().trim());
+                formData.append("siteLinkedin", $("#siteLinkedin").val().trim());
+
+                if (fileInput) {
+                    formData.append("siteLogo", fileInput); // ✅ Append file correctly
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/editInfo",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات موفق',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'باشه'
+                            }).then(() => {
+                                showSpinner();
+                                location.reload(); 
+                                hideSpinner();
+                            });
+                        } else {
+                            hideSpinner();
+                            Swal.fire({
+                                title: 'عملیات ناموفق',
+                                text: response.message || 'ناموفق در به روزرسانی مقادیر مورد نظر',
+                                icon: 'error',
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            title: 'خطا از سمت سرور',
+                            text: 'خطا از سمت سرور میباشد لطفا دوباره تلاش کنید',
+                            icon: 'error',
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+    
+    }

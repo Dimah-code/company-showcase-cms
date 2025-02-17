@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                <a href="/Products/Productslist" class="btn btn-secondary">بازگشت</a>
+                <button data-bs-toggle="modal" data-bs-target="#openAddNewModal" class="btn btn-primary">ایجاد دسته‌بندی جدید</button>
+            </h5>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">نام دسته‌بندی</th>
+                        <th scope="col">نام دسته‌بندی به انگلیسی</th>
+                        <th scope="col">ویرایش</th>
+                        <th scope="col">حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.category)
+                    {
+                        <tr>
+                            <td>@item.Cname</td>
+                            <td> @item.CnameEn </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal-@item.cID">
+                                    ویرایش
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deleteCategory(@item.cID)" class="btn btn-danger">حذف</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="openAddNewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">اضافه کردن دسته‌بندی جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newCatForm">
+                    <label for="newCatVal" class="form-label">نام دسته‌بندی :</label>
+                    <input type="text" class="form-control" id="newCatVal" name="newcatval" required>
+                    <br />
+                    <label for="newCatVal" class="form-label">نام دسته‌بندی به انگلیسی :</label>
+                    <input type="text" class="form-control" id="newCatValEn" name="newcatvalEn" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" id="addNew">ثبت</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in ViewBag.category)
+{
+    <div class="modal fade" id="editModal-@item.cID" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ویرایش نام دسته‌بندی "@item.Cname"</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm-@item.cID">
+                        <label for="CategoryName" class="form-label">نام دسته‌بندی :</label>
+                        <input type="text" id="Catid" value="@item.cID" style="display:none" />
+                        <input type="text" class="form-control" id="Catval" name="CategoryName" value="@item.Cname" required>
+                        <br />
+                        <label for="CategoryName" class="form-label">نام دسته‌بندی به انگلیسی :</label>
+                        <input type="text" class="form-control" id="Catvalen" name="CategoryName" value="@item.CnameEn" required>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                    <button type="button" class="btn btn-primary" id="saveEdit">ذخیره</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $(document).on("click", "#addNew", function () {
+            showSpinner();
+            const catName = $("#newCatVal").val();
+            const catNameEn = $("#newCatValEn").val();
+            $.ajax({
+                url: "/Products/AddNewCategory",
+                type: "POST",
+                data: { catName: catName, catNameEn: catNameEn },
+                success: function (response) {
+                    if (response.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات موفقیت‌آمیز بود",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "باشه"
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات ناموفق ",
+                            text: response.message,
+                            icon: "error",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                },
+                error: function () {
+                    hideSpinner();
+                    Swal.fire({
+                        title: "خطا",
+                        text: "خطا در برقراری ارتباط با سرور",
+                        icon: "error",
+                        confirmButtonText: "باشه"
+                    });
+                }
+            });
+        });
+
+        // Edit category
+
+        $(document).on("click", "#saveEdit", function () {
+            showSpinner();
+            const id = $("#Catid").val();
+            const cname = $("#Catval").val();
+            const cnameEn = $("#Catvalen").val();
+
+            $.ajax({
+                url: `/Products/EditCategory`,
+                type: "POST",
+                data: { id: id, cname: cname, cnameEn: cnameEn },
+                success: function (response) {
+                    if (response.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات موفقیت‌آمیز بود",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "باشه"
+                        }).then(() => {
+
+                            location.reload();
+                        });
+                    } else {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات ناموفق ",
+                            text: response.message,
+                            icon: "error",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                },
+                error: function () {
+                    hideSpinner();
+                    Swal.fire({
+                        title: "خطا",
+                        text: "خطا در برقراری ارتباط با سرور",
+                        icon: "error",
+                        confirmButtonText: "باشه"
+                    });
+                }
+            });
+        });
+
+        // function Delete Category
+
+        function deleteCategory(categoryId) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: 'این عملیات غیرقابل بازگشت خواهد بود! و تمامی محصولات مرتبط حذف خواهند شد!!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSpinner();
+                    $.ajax({
+                        url: "/Products/DeleteCategory",
+                        type: "POST",
+                        data: { categoryId: categoryId },
+                        success: function (response) {
+                            if (response.success) {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'حذف شد!',
+                                    text: 'دسته‌بندی با موفقیت حذف شد.',
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطا در حذف دسته‌بندی',
+                                    text: response.message || 'مشکلی رخ داده است.',
+                                    confirmButtonText: 'باشه'
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            hideSpinner();
+                            // Handle errors when AJAX fails
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطای سرور',
+                                text: 'درخواست شما با خطا مواجه شد. لطفاً دوباره امتحان کنید.'|| jqXHR || textStatus || errorThrown ,
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+
+
+}

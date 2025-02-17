@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "BlogsList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                <a href="/Blogs/AddNewBlog" class="btn btn-primary">ایجاد بلاگ جدید</a>
+                <a href="/Blogs/Categories" class="btn btn-secondary">مدیریت دسته‌بندی‌ها</a>
+            </h5>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">نام بلاگ</th>
+                        <th scope="col">دسته بندی</th>
+                        <th scope="col">نویسنده</th>
+                        <th scope="col">تاریخ</th>
+                        <th scope="col">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in ViewBag.blogs)
+                    {
+                        <tr>
+                            <td>@item.bName</td>
+                            <td>@item.bcName</td>
+                            <td>@item.tNameFamily</td>
+                            <td>@item.bCreatedAt</td>
+
+                            <td><a href="/Blogs/EditBlog/@item.bID" class="btn btn-success">ویرایش</a>  <button onclick="confirmDelete(@item.bID)" class="btn btn-danger">حذف</button></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+
+        function confirmDelete(id) {
+            swal.fire({
+                icon: "warning",
+                title: "این عملیات غیرقابل بازگشت است!",
+                text: "شما در حال حذف  بلاگ  هستید! آیا مطمئنید؟!",
+                showCancelButton: true,
+                confirmButtonColor: 'blue',
+                cancelButtonColor: 'red',
+                cancelButtonText: "لغو",
+                confirmButtonText: "بله حذف کن"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteBlog(id);
+                }
+            });
+        }
+        function deleteBlog(id) {
+            $.ajax({
+                url: "/Blogs/DeleteBlog",
+                type: "POST",
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        swal.fire({
+                            title: "عملیات موفق",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "باشه"
+                        }).then(() => {
+                            window.location.href = "/Blogs/blogslist";
+                        });
+                    } else {
+                        swal.fire({
+                            title: "عملیات ناموفق",
+                            text: response.message,
+                            icon: "error",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    Swal.fire({
+                        title: "خطا",
+                        text: "خطا از سمت سرور " + xhr.message,
+                        icon: "error",
+                        confirmButtonText: "باشه"
+                    })
+                }
+            });
+        }
+    </script>
+    }

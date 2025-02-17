@@ -1,0 +1,128 @@
+﻿@model PortoWeb.Models.MessagesClass
+@using PortoWeb.Helpers
+@{
+    ViewBag.Title = "MessagesList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                لیست پیام ها
+            </h5>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">شناسه</th>
+                        <th scope="col" class="text-center">نام فرستنده</th>
+                        <th scope="col" class="text-center">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.MessagesList)
+                    {
+                        <tr>
+                            <td>@item.pkID</td>
+                            <td class="text-center">@item.name</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal-@item.pkID">
+                                    مشاهده
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deletePM(@item.pkID)" class="btn btn-danger">حذف</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@foreach (var item in Model.MessagesList)
+{
+
+    <div class="modal fade" id="showModal-@item.pkID" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">فرستنده : @item.name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-header" >
+                    <h5>شماره تلفن : @item.phone</h5>
+                </div>
+                <div class="modal-body">
+                  @item.message
+                    <br />
+                    <div dir="ltr">
+                        <p> @PortoWeb.Helpers.DateTimeExtensions.ToPersianDate(item.CreatedAt) : تاریخ </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                    <button type="button" onclick="deletePM(@item.pkID)" class="btn btn-danger">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        function deletePM(pmId) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: 'این عملیات غیرقابل بازگشت خواهد بود, این پیام برای همیشه پاک خواهد شد!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSpinner();
+                    $.ajax({
+                        url: "/Messages/DeleteMessage",
+                        type: "POST",
+                        data: { id: pmId },
+                        success: function (response) {
+                            if (response.success) {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'حذف شد!',
+                                    text: response.message,
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: "عملیات ناموفق",
+                                    text: response.message || 'مشکلی رخ داده است.',
+                                    confirmButtonText: 'باشه'
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            hideSpinner();
+                            // Handle errors when AJAX fails
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطای سرور',
+                                text: 'درخواست شما با خطا مواجه شد. لطفاً دوباره امتحان کنید.' || jqXHR || textStatus || errorThrown,
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

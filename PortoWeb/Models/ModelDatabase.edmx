@@ -1,0 +1,1358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PortoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Table_AboutTitle">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AbtSloganFa" Type="nvarchar" MaxLength="200" />
+          <Property Name="AbtTitleFa" Type="nvarchar" MaxLength="100" />
+          <Property Name="AbtParagFa" Type="nvarchar" MaxLength="288" />
+          <Property Name="AbtSloganEn" Type="nvarchar" MaxLength="200" />
+          <Property Name="AbtTitleEn" Type="nvarchar" MaxLength="200" />
+          <Property Name="AbtParagEn" Type="nvarchar" MaxLength="288" />
+        </EntityType>
+        <EntityType Name="Table_Banner">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bannerImage" Type="nvarchar" MaxLength="100" />
+          <Property Name="bannerTitleFa" Type="nvarchar" MaxLength="200" />
+          <Property Name="buttonCaptionFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="bannerAltFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="bannerTitleEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="buttonCaptionEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="siteNameEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_BlogCategory">
+          <Key>
+            <PropertyRef Name="bcID" />
+          </Key>
+          <Property Name="bcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bcName" Type="nvarchar" MaxLength="50" />
+          <Property Name="bcNameEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_BlogImages">
+          <Key>
+            <PropertyRef Name="bpID" />
+          </Key>
+          <Property Name="bpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bpUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="blogID" Type="int" />
+        </EntityType>
+        <EntityType Name="Table_Blogs">
+          <Key>
+            <PropertyRef Name="bID" />
+          </Key>
+          <Property Name="bID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bName" Type="nvarchar" MaxLength="60" />
+          <Property Name="bTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="bContent" Type="nvarchar(max)" />
+          <Property Name="bCategory" Type="int" />
+          <Property Name="bKeywords" Type="nvarchar" MaxLength="100" />
+          <Property Name="bWriter" Type="int" />
+          <Property Name="bMainPic" Type="nvarchar" MaxLength="100" />
+          <Property Name="bCreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="language" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Table_BottomIndex">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressEn" Type="nvarchar" MaxLength="200" />
+          <Property Name="TimeWorkEn" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Table_Category">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname" Type="nvarchar" MaxLength="50" />
+          <Property Name="CnameEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_CounterTexts">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="blogCounterFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="projectCounterFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="teamCounterFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="blogCounterEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="projectCounterEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="teamCounterEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_Header">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logoName" Type="nvarchar" MaxLength="100" />
+          <Property Name="homeFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="aboutFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="projectsFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="contactFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="teamFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="blogFa" Type="nvarchar" MaxLength="50" />
+          <Property Name="homeEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="aboutEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="projectsEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="contactEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="teamEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="blogEn" Type="nvarchar" MaxLength="50" />
+          <Property Name="logoAlt" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Table_HomeAbout">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainTitleFa" Type="nvarchar" MaxLength="100" />
+          <Property Name="MainPgFa" Type="nvarchar" MaxLength="200" />
+          <Property Name="MainTitleEn" Type="nvarchar" MaxLength="100" />
+          <Property Name="MainPgEn" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title01Fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title02Fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title03Fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title04Fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title01En" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title02En" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title03En" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title04En" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_Members">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MnameFamily" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Mpic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mdes" Type="nvarchar" MaxLength="500" />
+          <Property Name="Mrole" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mphone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Memail" Type="nvarchar" MaxLength="150" />
+          <Property Name="Musername" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mpassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Mlinkedin" Type="nvarchar" MaxLength="500" />
+          <Property Name="Minstagram" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Table_Messages">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="59" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table_Pages">
+          <Key>
+            <PropertyRef Name="pageID" />
+          </Key>
+          <Property Name="pageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="pageDes" Type="nvarchar" MaxLength="509" />
+          <Property Name="pageKeywords" Type="nvarchar" MaxLength="500" />
+          <Property Name="pageTitle" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Table_ProjectImage">
+          <Key>
+            <PropertyRef Name="imageID" />
+          </Key>
+          <Property Name="imageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectID" Type="int" Nullable="false" />
+          <Property Name="imageUrl" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Table_Projects">
+          <Key>
+            <PropertyRef Name="pID" />
+          </Key>
+          <Property Name="pID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pName" Type="nvarchar" MaxLength="100" />
+          <Property Name="pDes" Type="nvarchar(max)" />
+          <Property Name="pMainPic" Type="nvarchar" MaxLength="50" />
+          <Property Name="pCategory" Type="int" Nullable="false" />
+          <Property Name="pClient" Type="nvarchar" MaxLength="100" />
+          <Property Name="DoneDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="lang" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Table_ProjTeam">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title1Fa" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title1En" Type="nvarchar" MaxLength="200" />
+          <Property Name="ButtonCaption1Fa" Type="nvarchar" MaxLength="100" />
+          <Property Name="ButtonCaption1En" Type="nvarchar" MaxLength="100" />
+          <Property Name="Title2Fa" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title2En" Type="nvarchar" MaxLength="200" />
+          <Property Name="ButtonCaption2Fa" Type="nvarchar" MaxLength="100" />
+          <Property Name="ButtonCaption2En" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Table_Roles">
+          <Key>
+            <PropertyRef Name="rID" />
+          </Key>
+          <Property Name="rID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pkRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleDes" Type="nvarchar" MaxLength="420" />
+        </EntityType>
+        <EntityType Name="Table_siteInfo">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteName" Type="nvarchar" MaxLength="100" />
+          <Property Name="address" Type="nvarchar" MaxLength="589" />
+          <Property Name="timeWork" Type="nvarchar" MaxLength="198" />
+          <Property Name="siteEmail" Type="nvarchar" MaxLength="188" />
+          <Property Name="sitePhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="siteLinkedin" Type="nvarchar" MaxLength="199" />
+          <Property Name="siteInstagram" Type="nvarchar" MaxLength="199" />
+          <Property Name="siteYT" Type="nvarchar" MaxLength="199" />
+          <Property Name="googleMap" Type="nvarchar(max)" />
+          <Property Name="siteLogo" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="Table_Team">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tNameFamily" Type="nvarchar" MaxLength="71" />
+          <Property Name="tDes" Type="nvarchar" MaxLength="400" />
+          <Property Name="tPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkRole" Type="int" />
+          <Property Name="tInstagram" Type="nvarchar" MaxLength="100" />
+          <Property Name="tLinkedin" Type="nvarchar" MaxLength="100" />
+          <Property Name="tSkill1" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill2" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill3" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill4" Type="nvarchar" MaxLength="50" />
+          <Property Name="tTitle" Type="nvarchar" MaxLength="70" />
+          <Property Name="lang" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Table_TopOfCounter">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t1fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="t2fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="t3fa" Type="nvarchar" MaxLength="50" />
+          <Property Name="p1fa" Type="nvarchar" MaxLength="400" />
+          <Property Name="p2fa" Type="nvarchar" MaxLength="400" />
+          <Property Name="p3fa" Type="nvarchar" MaxLength="400" />
+          <Property Name="t1en" Type="nvarchar" MaxLength="50" />
+          <Property Name="t2en" Type="nvarchar" MaxLength="50" />
+          <Property Name="t3en" Type="nvarchar" MaxLength="50" />
+          <Property Name="p1en" Type="nvarchar" MaxLength="400" />
+          <Property Name="p2en" Type="nvarchar" MaxLength="400" />
+          <Property Name="p3en" Type="nvarchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="Table_UnderOFCounter">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="photoPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="aboutTitleFa" Type="nvarchar" MaxLength="100" />
+          <Property Name="aboutParagFa" Type="nvarchar(max)" />
+          <Property Name="aboutTitleEn" Type="nvarchar" MaxLength="100" />
+          <Property Name="aboutParagEn" Type="nvarchar(max)" />
+          <Property Name="photoAlt" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '23974_Porto.dbo.View_BlogNcat' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_BlogNcat">
+          <Key>
+            <PropertyRef Name="bID" />
+          </Key>
+          <Property Name="bID" Type="int" Nullable="false" />
+          <Property Name="bName" Type="nvarchar" MaxLength="60" />
+          <Property Name="bTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="bContent" Type="nvarchar(max)" />
+          <Property Name="bCategory" Type="int" />
+          <Property Name="bKeywords" Type="nvarchar" MaxLength="100" />
+          <Property Name="bWriter" Type="int" />
+          <Property Name="bMainPic" Type="nvarchar" MaxLength="100" />
+          <Property Name="bCreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="language" Type="nvarchar" MaxLength="4" />
+          <Property Name="tNameFamily" Type="nvarchar" MaxLength="71" />
+          <Property Name="tPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="tTitle" Type="nvarchar" MaxLength="70" />
+          <Property Name="bcName" Type="nvarchar" MaxLength="50" />
+          <Property Name="bcNameEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '23974_Porto.dbo.View_ProjectList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ProjectList">
+          <Key>
+            <PropertyRef Name="pID" />
+            <PropertyRef Name="pCategory" />
+          </Key>
+          <Property Name="pID" Type="int" Nullable="false" />
+          <Property Name="pName" Type="nvarchar" MaxLength="100" />
+          <Property Name="pDes" Type="nvarchar(max)" />
+          <Property Name="pMainPic" Type="nvarchar" MaxLength="50" />
+          <Property Name="pCategory" Type="int" Nullable="false" />
+          <Property Name="pClient" Type="nvarchar" MaxLength="100" />
+          <Property Name="DoneDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lang" Type="nvarchar" MaxLength="4" />
+          <Property Name="CnameEn" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '23974_Porto.dbo.View_TeamRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_TeamRole">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="int" Nullable="false" />
+          <Property Name="tNameFamily" Type="nvarchar" MaxLength="71" />
+          <Property Name="tDes" Type="nvarchar" MaxLength="400" />
+          <Property Name="tPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkRole" Type="int" />
+          <Property Name="tInstagram" Type="nvarchar" MaxLength="100" />
+          <Property Name="tLinkedin" Type="nvarchar" MaxLength="100" />
+          <Property Name="tSkill1" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill2" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill3" Type="nvarchar" MaxLength="50" />
+          <Property Name="tSkill4" Type="nvarchar" MaxLength="50" />
+          <Property Name="tTitle" Type="nvarchar" MaxLength="70" />
+          <Property Name="pkRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleDes" Type="nvarchar" MaxLength="420" />
+          <Property Name="lang" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <Association Name="FK_Table_BlogImages_Table_Blogs">
+          <End Role="Table_Blogs" Type="Self.Table_Blogs" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Table_BlogImages" Type="Self.Table_BlogImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Blogs">
+              <PropertyRef Name="bID" />
+            </Principal>
+            <Dependent Role="Table_BlogImages">
+              <PropertyRef Name="blogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Blogs_Table_BlogCategory">
+          <End Role="Table_Team" Type="Self.Table_Team" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Table_Blogs" Type="Self.Table_Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Team">
+              <PropertyRef Name="tID" />
+            </Principal>
+            <Dependent Role="Table_Blogs">
+              <PropertyRef Name="bWriter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Blogs_Table_BlogCategory1">
+          <End Role="Table_BlogCategory" Type="Self.Table_BlogCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Table_Blogs" Type="Self.Table_Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_BlogCategory">
+              <PropertyRef Name="bcID" />
+            </Principal>
+            <Dependent Role="Table_Blogs">
+              <PropertyRef Name="bCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ProjectImage_Table_Projects">
+          <End Role="Table_Projects" Type="Self.Table_Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Table_ProjectImage" Type="Self.Table_ProjectImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Projects">
+              <PropertyRef Name="pID" />
+            </Principal>
+            <Dependent Role="Table_ProjectImage">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Projects_Table_Category">
+          <End Role="Table_Category" Type="Self.Table_Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Table_Projects" Type="Self.Table_Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Category">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Table_Projects">
+              <PropertyRef Name="pCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Team_Table_Roles">
+          <End Role="Table_Roles" Type="Self.Table_Roles" Multiplicity="0..1" />
+          <End Role="Table_Team" Type="Self.Table_Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roles">
+              <PropertyRef Name="rID" />
+            </Principal>
+            <Dependent Role="Table_Team">
+              <PropertyRef Name="fkRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PortoModelStoreContainer">
+          <EntitySet Name="Table_AboutTitle" EntityType="Self.Table_AboutTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Banner" EntityType="Self.Table_Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_BlogCategory" EntityType="Self.Table_BlogCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_BlogImages" EntityType="Self.Table_BlogImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Blogs" EntityType="Self.Table_Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_BottomIndex" EntityType="Self.Table_BottomIndex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Category" EntityType="Self.Table_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_CounterTexts" EntityType="Self.Table_CounterTexts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Header" EntityType="Self.Table_Header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_HomeAbout" EntityType="Self.Table_HomeAbout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Members" EntityType="Self.Table_Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Messages" EntityType="Self.Table_Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Pages" EntityType="Self.Table_Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_ProjectImage" EntityType="Self.Table_ProjectImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Projects" EntityType="Self.Table_Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_ProjTeam" EntityType="Self.Table_ProjTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Roles" EntityType="Self.Table_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_siteInfo" EntityType="Self.Table_siteInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Team" EntityType="Self.Table_Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_TopOfCounter" EntityType="Self.Table_TopOfCounter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_UnderOFCounter" EntityType="Self.Table_UnderOFCounter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_BlogNcat" EntityType="Self.View_BlogNcat" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_BlogNcat].[bID] AS [bID], 
+    [View_BlogNcat].[bName] AS [bName], 
+    [View_BlogNcat].[bTitle] AS [bTitle], 
+    [View_BlogNcat].[bContent] AS [bContent], 
+    [View_BlogNcat].[bCategory] AS [bCategory], 
+    [View_BlogNcat].[bKeywords] AS [bKeywords], 
+    [View_BlogNcat].[bWriter] AS [bWriter], 
+    [View_BlogNcat].[bMainPic] AS [bMainPic], 
+    [View_BlogNcat].[bCreatedAt] AS [bCreatedAt], 
+    [View_BlogNcat].[language] AS [language], 
+    [View_BlogNcat].[tNameFamily] AS [tNameFamily], 
+    [View_BlogNcat].[tPhoto] AS [tPhoto], 
+    [View_BlogNcat].[tTitle] AS [tTitle], 
+    [View_BlogNcat].[bcName] AS [bcName], 
+    [View_BlogNcat].[bcNameEn] AS [bcNameEn]
+    FROM [dbo].[View_BlogNcat] AS [View_BlogNcat]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ProjectList" EntityType="Self.View_ProjectList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ProjectList].[pID] AS [pID], 
+    [View_ProjectList].[pName] AS [pName], 
+    [View_ProjectList].[pDes] AS [pDes], 
+    [View_ProjectList].[pMainPic] AS [pMainPic], 
+    [View_ProjectList].[pCategory] AS [pCategory], 
+    [View_ProjectList].[pClient] AS [pClient], 
+    [View_ProjectList].[DoneDate] AS [DoneDate], 
+    [View_ProjectList].[Cname] AS [Cname], 
+    [View_ProjectList].[lang] AS [lang], 
+    [View_ProjectList].[CnameEn] AS [CnameEn]
+    FROM [dbo].[View_ProjectList] AS [View_ProjectList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_TeamRole" EntityType="Self.View_TeamRole" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_TeamRole].[tID] AS [tID], 
+    [View_TeamRole].[tNameFamily] AS [tNameFamily], 
+    [View_TeamRole].[tDes] AS [tDes], 
+    [View_TeamRole].[tPhoto] AS [tPhoto], 
+    [View_TeamRole].[fkRole] AS [fkRole], 
+    [View_TeamRole].[tInstagram] AS [tInstagram], 
+    [View_TeamRole].[tLinkedin] AS [tLinkedin], 
+    [View_TeamRole].[tSkill1] AS [tSkill1], 
+    [View_TeamRole].[tSkill2] AS [tSkill2], 
+    [View_TeamRole].[tSkill3] AS [tSkill3], 
+    [View_TeamRole].[tSkill4] AS [tSkill4], 
+    [View_TeamRole].[tTitle] AS [tTitle], 
+    [View_TeamRole].[pkRole] AS [pkRole], 
+    [View_TeamRole].[roleDes] AS [roleDes], 
+    [View_TeamRole].[lang] AS [lang]
+    FROM [dbo].[View_TeamRole] AS [View_TeamRole]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Table_BlogImages_Table_Blogs" Association="Self.FK_Table_BlogImages_Table_Blogs">
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+            <End Role="Table_BlogImages" EntitySet="Table_BlogImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Blogs_Table_BlogCategory" Association="Self.FK_Table_Blogs_Table_BlogCategory">
+            <End Role="Table_Team" EntitySet="Table_Team" />
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Blogs_Table_BlogCategory1" Association="Self.FK_Table_Blogs_Table_BlogCategory1">
+            <End Role="Table_BlogCategory" EntitySet="Table_BlogCategory" />
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ProjectImage_Table_Projects" Association="Self.FK_Table_ProjectImage_Table_Projects">
+            <End Role="Table_Projects" EntitySet="Table_Projects" />
+            <End Role="Table_ProjectImage" EntitySet="Table_ProjectImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Projects_Table_Category" Association="Self.FK_Table_Projects_Table_Category">
+            <End Role="Table_Category" EntitySet="Table_Category" />
+            <End Role="Table_Projects" EntitySet="Table_Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Team_Table_Roles" Association="Self.FK_Table_Team_Table_Roles">
+            <End Role="Table_Roles" EntitySet="Table_Roles" />
+            <End Role="Table_Team" EntitySet="Table_Team" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Table_BlogImages">
+          <Key>
+            <PropertyRef Name="bpID" />
+          </Key>
+          <Property Name="bpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bpUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="blogID" Type="Int32" />
+          <NavigationProperty Name="Table_Blogs" Relationship="PortoModel.FK_Table_BlogImages_Table_Blogs" FromRole="Table_BlogImages" ToRole="Table_Blogs" />
+        </EntityType>
+        <EntityType Name="Table_Category">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Projects" Relationship="PortoModel.FK_Table_Projects_Table_Category" FromRole="Table_Category" ToRole="Table_Projects" />
+          <Property Name="CnameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Members">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MnameFamily" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mpic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mdes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mrole" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mphone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Memail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Musername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mpassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mlinkedin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Minstagram" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Pages">
+          <Key>
+            <PropertyRef Name="pageID" />
+          </Key>
+          <Property Name="pageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pageDes" Type="String" MaxLength="509" FixedLength="false" Unicode="true" />
+          <Property Name="pageKeywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="pageTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_ProjectImage">
+          <Key>
+            <PropertyRef Name="imageID" />
+          </Key>
+          <Property Name="imageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectID" Type="Int32" Nullable="false" />
+          <Property Name="imageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Projects" Relationship="PortoModel.FK_Table_ProjectImage_Table_Projects" FromRole="Table_ProjectImage" ToRole="Table_Projects" />
+        </EntityType>
+        <EntityType Name="Table_Roles">
+          <Key>
+            <PropertyRef Name="rID" />
+          </Key>
+          <Property Name="rID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pkRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleDes" Type="String" MaxLength="420" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Team" Relationship="PortoModel.FK_Table_Team_Table_Roles" FromRole="Table_Roles" ToRole="Table_Team" />
+        </EntityType>
+        <EntityType Name="Table_siteInfo">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="589" FixedLength="false" Unicode="true" />
+          <Property Name="timeWork" Type="String" MaxLength="198" FixedLength="false" Unicode="true" />
+          <Property Name="siteEmail" Type="String" MaxLength="188" FixedLength="false" Unicode="true" />
+          <Property Name="sitePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="siteLinkedin" Type="String" MaxLength="199" FixedLength="false" Unicode="true" />
+          <Property Name="siteInstagram" Type="String" MaxLength="199" FixedLength="false" Unicode="true" />
+          <Property Name="siteYT" Type="String" MaxLength="199" FixedLength="false" Unicode="true" />
+          <Property Name="googleMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="siteLogo" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PortoDB1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Table_BlogImages" EntityType="Self.Table_BlogImages" />
+          <EntitySet Name="Table_Category" EntityType="Self.Table_Category" />
+          <EntitySet Name="Table_Members" EntityType="Self.Table_Members" />
+          <EntitySet Name="Table_Pages" EntityType="Self.Table_Pages" />
+          <EntitySet Name="Table_ProjectImage" EntityType="Self.Table_ProjectImage" />
+          <EntitySet Name="Table_Roles" EntityType="Self.Table_Roles" />
+          <EntitySet Name="Table_siteInfo" EntityType="Self.Table_siteInfo" />
+          <EntitySet Name="Table_Header" EntityType="PortoModel.Table_Header" />
+          <EntitySet Name="Table_HomeAbout" EntityType="PortoModel.Table_HomeAbout" />
+          <EntitySet Name="Table_ProjTeam" EntityType="PortoModel.Table_ProjTeam" />
+          <EntitySet Name="Table_BottomIndex" EntityType="PortoModel.Table_BottomIndex" />
+          <EntitySet Name="Table_AboutTitle" EntityType="PortoModel.Table_AboutTitle" />
+          <EntitySet Name="Table_TopOfCounter" EntityType="PortoModel.Table_TopOfCounter" />
+          <EntitySet Name="Table_CounterTexts" EntityType="PortoModel.Table_CounterTexts" />
+          <EntitySet Name="Table_UnderOFCounter" EntityType="PortoModel.Table_UnderOFCounter" />
+          <EntitySet Name="Table_Messages" EntityType="PortoModel.Table_Messages" />
+          <EntitySet Name="Table_Banner" EntityType="PortoModel.Table_Banner" />
+          <EntitySet Name="Table_Projects" EntityType="PortoModel.Table_Projects" />
+          <AssociationSet Name="FK_Table_Projects_Table_Category" Association="PortoModel.FK_Table_Projects_Table_Category">
+            <End Role="Table_Category" EntitySet="Table_Category" />
+            <End Role="Table_Projects" EntitySet="Table_Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ProjectImage_Table_Projects" Association="PortoModel.FK_Table_ProjectImage_Table_Projects">
+            <End Role="Table_Projects" EntitySet="Table_Projects" />
+            <End Role="Table_ProjectImage" EntitySet="Table_ProjectImage" />
+          </AssociationSet>
+          <EntitySet Name="View_ProjectList" EntityType="PortoModel.View_ProjectList" />
+          <EntitySet Name="Table_Team" EntityType="PortoModel.Table_Team" />
+          <AssociationSet Name="FK_Table_Team_Table_Roles" Association="PortoModel.FK_Table_Team_Table_Roles">
+            <End Role="Table_Roles" EntitySet="Table_Roles" />
+            <End Role="Table_Team" EntitySet="Table_Team" />
+          </AssociationSet>
+          <EntitySet Name="View_TeamRole" EntityType="PortoModel.View_TeamRole" />
+          <EntitySet Name="Table_Blogs" EntityType="PortoModel.Table_Blogs" />
+          <AssociationSet Name="FK_Table_BlogImages_Table_Blogs" Association="PortoModel.FK_Table_BlogImages_Table_Blogs">
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+            <End Role="Table_BlogImages" EntitySet="Table_BlogImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Blogs_Table_BlogCategory" Association="PortoModel.FK_Table_Blogs_Table_BlogCategory">
+            <End Role="Table_Team" EntitySet="Table_Team" />
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+          </AssociationSet>
+          <EntitySet Name="Table_BlogCategory" EntityType="PortoModel.Table_BlogCategory" />
+          <AssociationSet Name="FK_Table_Blogs_Table_BlogCategory1" Association="PortoModel.FK_Table_Blogs_Table_BlogCategory1">
+            <End Role="Table_BlogCategory" EntitySet="Table_BlogCategory" />
+            <End Role="Table_Blogs" EntitySet="Table_Blogs" />
+          </AssociationSet>
+          <EntitySet Name="View_BlogNcat" EntityType="PortoModel.View_BlogNcat" />
+        </EntityContainer>
+        <EntityType Name="Table_Header">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logoName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="homeFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="aboutFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projectsFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contactFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teamFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blogFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="homeEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="aboutEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projectsEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contactEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teamEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blogEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logoAlt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_HomeAbout">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainTitleFa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MainPgFa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MainTitleEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MainPgEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title01Fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title02Fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title03Fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title04Fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title01En" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title02En" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title03En" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title04En" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_ProjTeam">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1Fa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title1En" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonCaption1Fa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonCaption1En" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Title2Fa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title2En" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonCaption2Fa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonCaption2En" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_BottomIndex">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TimeWorkEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_AboutTitle">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AbtSloganFa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbtTitleFa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AbtParagFa" Type="String" MaxLength="288" FixedLength="false" Unicode="true" />
+          <Property Name="AbtSloganEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbtTitleEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbtParagEn" Type="String" MaxLength="288" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_TopOfCounter">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t1fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="t2fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="t3fa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="p1fa" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="p2fa" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="p3fa" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="t1en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="t2en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="t3en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="p1en" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="p2en" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="p3en" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_CounterTexts">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="blogCounterFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projectCounterFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teamCounterFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blogCounterEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projectCounterEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teamCounterEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_UnderOFCounter">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="photoPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="aboutTitleFa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="aboutParagFa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="aboutTitleEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="aboutParagEn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photoAlt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Messages">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="59" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Table_Banner">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bannerImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="bannerTitleFa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="buttonCaptionFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bannerAltFa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bannerTitleEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="buttonCaptionEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="siteNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Projects">
+          <Key>
+            <PropertyRef Name="pID" />
+          </Key>
+          <Property Name="pID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="pDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pMainPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pCategory" Type="Int32" Nullable="false" />
+          <Property Name="pClient" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DoneDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Category" Relationship="PortoModel.FK_Table_Projects_Table_Category" FromRole="Table_Projects" ToRole="Table_Category" />
+          <NavigationProperty Name="Table_ProjectImage" Relationship="PortoModel.FK_Table_ProjectImage_Table_Projects" FromRole="Table_Projects" ToRole="Table_ProjectImage" />
+        </EntityType>
+        <Association Name="FK_Table_Projects_Table_Category">
+          <End Type="PortoModel.Table_Category" Role="Table_Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PortoModel.Table_Projects" Role="Table_Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Category">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Table_Projects">
+              <PropertyRef Name="pCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ProjectImage_Table_Projects">
+          <End Type="PortoModel.Table_Projects" Role="Table_Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PortoModel.Table_ProjectImage" Role="Table_ProjectImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Projects">
+              <PropertyRef Name="pID" />
+            </Principal>
+            <Dependent Role="Table_ProjectImage">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_ProjectList">
+          <Key>
+            <PropertyRef Name="pID" />
+            <PropertyRef Name="pCategory" />
+          </Key>
+          <Property Name="pID" Type="Int32" Nullable="false" />
+          <Property Name="pName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="pDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pMainPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pCategory" Type="Int32" Nullable="false" />
+          <Property Name="pClient" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DoneDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="CnameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Team">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tNameFamily" Type="String" MaxLength="71" FixedLength="false" Unicode="true" />
+          <Property Name="tDes" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="tPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkRole" Type="Int32" />
+          <Property Name="tInstagram" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tLinkedin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tTitle" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Roles" Relationship="PortoModel.FK_Table_Team_Table_Roles" FromRole="Table_Team" ToRole="Table_Roles" />
+          <NavigationProperty Name="Table_Blogs" Relationship="PortoModel.FK_Table_Blogs_Table_BlogCategory" FromRole="Table_Team" ToRole="Table_Blogs" />
+        </EntityType>
+        <Association Name="FK_Table_Team_Table_Roles">
+          <End Type="PortoModel.Table_Roles" Role="Table_Roles" Multiplicity="0..1" />
+          <End Type="PortoModel.Table_Team" Role="Table_Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roles">
+              <PropertyRef Name="rID" />
+            </Principal>
+            <Dependent Role="Table_Team">
+              <PropertyRef Name="fkRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_TeamRole">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="Int32" Nullable="false" />
+          <Property Name="tNameFamily" Type="String" MaxLength="71" FixedLength="false" Unicode="true" />
+          <Property Name="tDes" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="tPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkRole" Type="Int32" />
+          <Property Name="tInstagram" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tLinkedin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tSkill4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tTitle" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="pkRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleDes" Type="String" MaxLength="420" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Blogs">
+          <Key>
+            <PropertyRef Name="bID" />
+          </Key>
+          <Property Name="bID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="bTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="bContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bCategory" Type="Int32" />
+          <Property Name="bKeywords" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="bWriter" Type="Int32" />
+          <Property Name="bMainPic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="bCreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="language" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_BlogImages" Relationship="PortoModel.FK_Table_BlogImages_Table_Blogs" FromRole="Table_Blogs" ToRole="Table_BlogImages" />
+          <NavigationProperty Name="Table_Team" Relationship="PortoModel.FK_Table_Blogs_Table_BlogCategory" FromRole="Table_Blogs" ToRole="Table_Team" />
+          <NavigationProperty Name="Table_BlogCategory" Relationship="PortoModel.FK_Table_Blogs_Table_BlogCategory1" FromRole="Table_Blogs" ToRole="Table_BlogCategory" />
+        </EntityType>
+        <Association Name="FK_Table_BlogImages_Table_Blogs">
+          <End Type="PortoModel.Table_Blogs" Role="Table_Blogs" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PortoModel.Table_BlogImages" Role="Table_BlogImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Blogs">
+              <PropertyRef Name="bID" />
+            </Principal>
+            <Dependent Role="Table_BlogImages">
+              <PropertyRef Name="blogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Blogs_Table_BlogCategory">
+          <End Type="PortoModel.Table_Team" Role="Table_Team" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PortoModel.Table_Blogs" Role="Table_Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Team">
+              <PropertyRef Name="tID" />
+            </Principal>
+            <Dependent Role="Table_Blogs">
+              <PropertyRef Name="bWriter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Table_BlogCategory">
+          <Key>
+            <PropertyRef Name="bcID" />
+          </Key>
+          <Property Name="bcID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bcName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bcNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_Blogs" Relationship="PortoModel.FK_Table_Blogs_Table_BlogCategory1" FromRole="Table_BlogCategory" ToRole="Table_Blogs" />
+        </EntityType>
+        <Association Name="FK_Table_Blogs_Table_BlogCategory1">
+          <End Type="PortoModel.Table_BlogCategory" Role="Table_BlogCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PortoModel.Table_Blogs" Role="Table_Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_BlogCategory">
+              <PropertyRef Name="bcID" />
+            </Principal>
+            <Dependent Role="Table_Blogs">
+              <PropertyRef Name="bCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_BlogNcat">
+          <Key>
+            <PropertyRef Name="bID" />
+          </Key>
+          <Property Name="bID" Type="Int32" Nullable="false" />
+          <Property Name="bName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="bTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="bContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bCategory" Type="Int32" />
+          <Property Name="bKeywords" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="bWriter" Type="Int32" />
+          <Property Name="bMainPic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="bCreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="language" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="tNameFamily" Type="String" MaxLength="71" FixedLength="false" Unicode="true" />
+          <Property Name="tPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tTitle" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="bcName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bcNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PortoModelStoreContainer" CdmEntityContainer="PortoDB1">
+          <EntitySetMapping Name="Table_BlogImages">
+            <EntityTypeMapping TypeName="PortoModel.Table_BlogImages">
+              <MappingFragment StoreEntitySet="Table_BlogImages">
+                <ScalarProperty Name="bpID" ColumnName="bpID" />
+                <ScalarProperty Name="bpUrl" ColumnName="bpUrl" />
+                <ScalarProperty Name="blogID" ColumnName="blogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Category">
+            <EntityTypeMapping TypeName="PortoModel.Table_Category">
+              <MappingFragment StoreEntitySet="Table_Category">
+                <ScalarProperty Name="CnameEn" ColumnName="CnameEn" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Cname" ColumnName="Cname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Members">
+            <EntityTypeMapping TypeName="PortoModel.Table_Members">
+              <MappingFragment StoreEntitySet="Table_Members">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="MnameFamily" ColumnName="MnameFamily" />
+                <ScalarProperty Name="Mpic" ColumnName="Mpic" />
+                <ScalarProperty Name="Mdes" ColumnName="Mdes" />
+                <ScalarProperty Name="Mrole" ColumnName="Mrole" />
+                <ScalarProperty Name="Mphone" ColumnName="Mphone" />
+                <ScalarProperty Name="Memail" ColumnName="Memail" />
+                <ScalarProperty Name="Musername" ColumnName="Musername" />
+                <ScalarProperty Name="Mpassword" ColumnName="Mpassword" />
+                <ScalarProperty Name="Mlinkedin" ColumnName="Mlinkedin" />
+                <ScalarProperty Name="Minstagram" ColumnName="Minstagram" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Pages">
+            <EntityTypeMapping TypeName="PortoModel.Table_Pages">
+              <MappingFragment StoreEntitySet="Table_Pages">
+                <ScalarProperty Name="pageID" ColumnName="pageID" />
+                <ScalarProperty Name="pageName" ColumnName="pageName" />
+                <ScalarProperty Name="pageDes" ColumnName="pageDes" />
+                <ScalarProperty Name="pageKeywords" ColumnName="pageKeywords" />
+                <ScalarProperty Name="pageTitle" ColumnName="pageTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_ProjectImage">
+            <EntityTypeMapping TypeName="PortoModel.Table_ProjectImage">
+              <MappingFragment StoreEntitySet="Table_ProjectImage">
+                <ScalarProperty Name="imageID" ColumnName="imageID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Roles">
+            <EntityTypeMapping TypeName="PortoModel.Table_Roles">
+              <MappingFragment StoreEntitySet="Table_Roles">
+                <ScalarProperty Name="rID" ColumnName="rID" />
+                <ScalarProperty Name="pkRole" ColumnName="pkRole" />
+                <ScalarProperty Name="roleDes" ColumnName="roleDes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_siteInfo">
+            <EntityTypeMapping TypeName="PortoModel.Table_siteInfo">
+              <MappingFragment StoreEntitySet="Table_siteInfo">
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+                <ScalarProperty Name="siteName" ColumnName="siteName" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="timeWork" ColumnName="timeWork" />
+                <ScalarProperty Name="siteEmail" ColumnName="siteEmail" />
+                <ScalarProperty Name="sitePhone" ColumnName="sitePhone" />
+                <ScalarProperty Name="siteLinkedin" ColumnName="siteLinkedin" />
+                <ScalarProperty Name="siteInstagram" ColumnName="siteInstagram" />
+                <ScalarProperty Name="siteYT" ColumnName="siteYT" />
+                <ScalarProperty Name="googleMap" ColumnName="googleMap" />
+                <ScalarProperty Name="siteLogo" ColumnName="siteLogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Header">
+            <EntityTypeMapping TypeName="PortoModel.Table_Header">
+              <MappingFragment StoreEntitySet="Table_Header">
+                <ScalarProperty Name="logoAlt" ColumnName="logoAlt" />
+                <ScalarProperty Name="blogEn" ColumnName="blogEn" />
+                <ScalarProperty Name="teamEn" ColumnName="teamEn" />
+                <ScalarProperty Name="contactEn" ColumnName="contactEn" />
+                <ScalarProperty Name="projectsEn" ColumnName="projectsEn" />
+                <ScalarProperty Name="aboutEn" ColumnName="aboutEn" />
+                <ScalarProperty Name="homeEn" ColumnName="homeEn" />
+                <ScalarProperty Name="blogFa" ColumnName="blogFa" />
+                <ScalarProperty Name="teamFa" ColumnName="teamFa" />
+                <ScalarProperty Name="contactFa" ColumnName="contactFa" />
+                <ScalarProperty Name="projectsFa" ColumnName="projectsFa" />
+                <ScalarProperty Name="aboutFa" ColumnName="aboutFa" />
+                <ScalarProperty Name="homeFa" ColumnName="homeFa" />
+                <ScalarProperty Name="logoName" ColumnName="logoName" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_HomeAbout">
+            <EntityTypeMapping TypeName="PortoModel.Table_HomeAbout">
+              <MappingFragment StoreEntitySet="Table_HomeAbout">
+                <ScalarProperty Name="Title04En" ColumnName="Title04En" />
+                <ScalarProperty Name="Title03En" ColumnName="Title03En" />
+                <ScalarProperty Name="Title02En" ColumnName="Title02En" />
+                <ScalarProperty Name="Title01En" ColumnName="Title01En" />
+                <ScalarProperty Name="Title04Fa" ColumnName="Title04Fa" />
+                <ScalarProperty Name="Title03Fa" ColumnName="Title03Fa" />
+                <ScalarProperty Name="Title02Fa" ColumnName="Title02Fa" />
+                <ScalarProperty Name="Title01Fa" ColumnName="Title01Fa" />
+                <ScalarProperty Name="MainPgEn" ColumnName="MainPgEn" />
+                <ScalarProperty Name="MainTitleEn" ColumnName="MainTitleEn" />
+                <ScalarProperty Name="MainPgFa" ColumnName="MainPgFa" />
+                <ScalarProperty Name="MainTitleFa" ColumnName="MainTitleFa" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_ProjTeam">
+            <EntityTypeMapping TypeName="PortoModel.Table_ProjTeam">
+              <MappingFragment StoreEntitySet="Table_ProjTeam">
+                <ScalarProperty Name="ButtonCaption2En" ColumnName="ButtonCaption2En" />
+                <ScalarProperty Name="ButtonCaption2Fa" ColumnName="ButtonCaption2Fa" />
+                <ScalarProperty Name="Title2En" ColumnName="Title2En" />
+                <ScalarProperty Name="Title2Fa" ColumnName="Title2Fa" />
+                <ScalarProperty Name="ButtonCaption1En" ColumnName="ButtonCaption1En" />
+                <ScalarProperty Name="ButtonCaption1Fa" ColumnName="ButtonCaption1Fa" />
+                <ScalarProperty Name="Title1En" ColumnName="Title1En" />
+                <ScalarProperty Name="Title1Fa" ColumnName="Title1Fa" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_BottomIndex">
+            <EntityTypeMapping TypeName="PortoModel.Table_BottomIndex">
+              <MappingFragment StoreEntitySet="Table_BottomIndex">
+                <ScalarProperty Name="TimeWorkEn" ColumnName="TimeWorkEn" />
+                <ScalarProperty Name="AddressEn" ColumnName="AddressEn" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_AboutTitle">
+            <EntityTypeMapping TypeName="PortoModel.Table_AboutTitle">
+              <MappingFragment StoreEntitySet="Table_AboutTitle">
+                <ScalarProperty Name="AbtParagEn" ColumnName="AbtParagEn" />
+                <ScalarProperty Name="AbtTitleEn" ColumnName="AbtTitleEn" />
+                <ScalarProperty Name="AbtSloganEn" ColumnName="AbtSloganEn" />
+                <ScalarProperty Name="AbtParagFa" ColumnName="AbtParagFa" />
+                <ScalarProperty Name="AbtTitleFa" ColumnName="AbtTitleFa" />
+                <ScalarProperty Name="AbtSloganFa" ColumnName="AbtSloganFa" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_TopOfCounter">
+            <EntityTypeMapping TypeName="PortoModel.Table_TopOfCounter">
+              <MappingFragment StoreEntitySet="Table_TopOfCounter">
+                <ScalarProperty Name="p3en" ColumnName="p3en" />
+                <ScalarProperty Name="p2en" ColumnName="p2en" />
+                <ScalarProperty Name="p1en" ColumnName="p1en" />
+                <ScalarProperty Name="t3en" ColumnName="t3en" />
+                <ScalarProperty Name="t2en" ColumnName="t2en" />
+                <ScalarProperty Name="t1en" ColumnName="t1en" />
+                <ScalarProperty Name="p3fa" ColumnName="p3fa" />
+                <ScalarProperty Name="p2fa" ColumnName="p2fa" />
+                <ScalarProperty Name="p1fa" ColumnName="p1fa" />
+                <ScalarProperty Name="t3fa" ColumnName="t3fa" />
+                <ScalarProperty Name="t2fa" ColumnName="t2fa" />
+                <ScalarProperty Name="t1fa" ColumnName="t1fa" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_CounterTexts">
+            <EntityTypeMapping TypeName="PortoModel.Table_CounterTexts">
+              <MappingFragment StoreEntitySet="Table_CounterTexts">
+                <ScalarProperty Name="teamCounterEn" ColumnName="teamCounterEn" />
+                <ScalarProperty Name="projectCounterEn" ColumnName="projectCounterEn" />
+                <ScalarProperty Name="blogCounterEn" ColumnName="blogCounterEn" />
+                <ScalarProperty Name="teamCounterFa" ColumnName="teamCounterFa" />
+                <ScalarProperty Name="projectCounterFa" ColumnName="projectCounterFa" />
+                <ScalarProperty Name="blogCounterFa" ColumnName="blogCounterFa" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_UnderOFCounter">
+            <EntityTypeMapping TypeName="PortoModel.Table_UnderOFCounter">
+              <MappingFragment StoreEntitySet="Table_UnderOFCounter">
+                <ScalarProperty Name="photoAlt" ColumnName="photoAlt" />
+                <ScalarProperty Name="aboutParagEn" ColumnName="aboutParagEn" />
+                <ScalarProperty Name="aboutTitleEn" ColumnName="aboutTitleEn" />
+                <ScalarProperty Name="aboutParagFa" ColumnName="aboutParagFa" />
+                <ScalarProperty Name="aboutTitleFa" ColumnName="aboutTitleFa" />
+                <ScalarProperty Name="photoPath" ColumnName="photoPath" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Messages">
+            <EntityTypeMapping TypeName="PortoModel.Table_Messages">
+              <MappingFragment StoreEntitySet="Table_Messages">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Banner">
+            <EntityTypeMapping TypeName="PortoModel.Table_Banner">
+              <MappingFragment StoreEntitySet="Table_Banner">
+                <ScalarProperty Name="siteNameEn" ColumnName="siteNameEn" />
+                <ScalarProperty Name="buttonCaptionEn" ColumnName="buttonCaptionEn" />
+                <ScalarProperty Name="bannerTitleEn" ColumnName="bannerTitleEn" />
+                <ScalarProperty Name="bannerAltFa" ColumnName="bannerAltFa" />
+                <ScalarProperty Name="buttonCaptionFa" ColumnName="buttonCaptionFa" />
+                <ScalarProperty Name="bannerTitleFa" ColumnName="bannerTitleFa" />
+                <ScalarProperty Name="bannerImage" ColumnName="bannerImage" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Projects">
+            <EntityTypeMapping TypeName="PortoModel.Table_Projects">
+              <MappingFragment StoreEntitySet="Table_Projects">
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="DoneDate" ColumnName="DoneDate" />
+                <ScalarProperty Name="pClient" ColumnName="pClient" />
+                <ScalarProperty Name="pCategory" ColumnName="pCategory" />
+                <ScalarProperty Name="pMainPic" ColumnName="pMainPic" />
+                <ScalarProperty Name="pDes" ColumnName="pDes" />
+                <ScalarProperty Name="pName" ColumnName="pName" />
+                <ScalarProperty Name="pID" ColumnName="pID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ProjectList">
+            <EntityTypeMapping TypeName="PortoModel.View_ProjectList">
+              <MappingFragment StoreEntitySet="View_ProjectList">
+                <ScalarProperty Name="CnameEn" ColumnName="CnameEn" />
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="Cname" ColumnName="Cname" />
+                <ScalarProperty Name="DoneDate" ColumnName="DoneDate" />
+                <ScalarProperty Name="pClient" ColumnName="pClient" />
+                <ScalarProperty Name="pCategory" ColumnName="pCategory" />
+                <ScalarProperty Name="pMainPic" ColumnName="pMainPic" />
+                <ScalarProperty Name="pDes" ColumnName="pDes" />
+                <ScalarProperty Name="pName" ColumnName="pName" />
+                <ScalarProperty Name="pID" ColumnName="pID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Team">
+            <EntityTypeMapping TypeName="PortoModel.Table_Team">
+              <MappingFragment StoreEntitySet="Table_Team">
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="tTitle" ColumnName="tTitle" />
+                <ScalarProperty Name="tSkill4" ColumnName="tSkill4" />
+                <ScalarProperty Name="tSkill3" ColumnName="tSkill3" />
+                <ScalarProperty Name="tSkill2" ColumnName="tSkill2" />
+                <ScalarProperty Name="tSkill1" ColumnName="tSkill1" />
+                <ScalarProperty Name="tLinkedin" ColumnName="tLinkedin" />
+                <ScalarProperty Name="tInstagram" ColumnName="tInstagram" />
+                <ScalarProperty Name="fkRole" ColumnName="fkRole" />
+                <ScalarProperty Name="tPhoto" ColumnName="tPhoto" />
+                <ScalarProperty Name="tDes" ColumnName="tDes" />
+                <ScalarProperty Name="tNameFamily" ColumnName="tNameFamily" />
+                <ScalarProperty Name="tID" ColumnName="tID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_TeamRole">
+            <EntityTypeMapping TypeName="PortoModel.View_TeamRole">
+              <MappingFragment StoreEntitySet="View_TeamRole">
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="roleDes" ColumnName="roleDes" />
+                <ScalarProperty Name="pkRole" ColumnName="pkRole" />
+                <ScalarProperty Name="tTitle" ColumnName="tTitle" />
+                <ScalarProperty Name="tSkill4" ColumnName="tSkill4" />
+                <ScalarProperty Name="tSkill3" ColumnName="tSkill3" />
+                <ScalarProperty Name="tSkill2" ColumnName="tSkill2" />
+                <ScalarProperty Name="tSkill1" ColumnName="tSkill1" />
+                <ScalarProperty Name="tLinkedin" ColumnName="tLinkedin" />
+                <ScalarProperty Name="tInstagram" ColumnName="tInstagram" />
+                <ScalarProperty Name="fkRole" ColumnName="fkRole" />
+                <ScalarProperty Name="tPhoto" ColumnName="tPhoto" />
+                <ScalarProperty Name="tDes" ColumnName="tDes" />
+                <ScalarProperty Name="tNameFamily" ColumnName="tNameFamily" />
+                <ScalarProperty Name="tID" ColumnName="tID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Blogs">
+            <EntityTypeMapping TypeName="PortoModel.Table_Blogs">
+              <MappingFragment StoreEntitySet="Table_Blogs">
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="bCreatedAt" ColumnName="bCreatedAt" />
+                <ScalarProperty Name="bMainPic" ColumnName="bMainPic" />
+                <ScalarProperty Name="bWriter" ColumnName="bWriter" />
+                <ScalarProperty Name="bKeywords" ColumnName="bKeywords" />
+                <ScalarProperty Name="bCategory" ColumnName="bCategory" />
+                <ScalarProperty Name="bContent" ColumnName="bContent" />
+                <ScalarProperty Name="bTitle" ColumnName="bTitle" />
+                <ScalarProperty Name="bName" ColumnName="bName" />
+                <ScalarProperty Name="bID" ColumnName="bID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_BlogCategory">
+            <EntityTypeMapping TypeName="PortoModel.Table_BlogCategory">
+              <MappingFragment StoreEntitySet="Table_BlogCategory">
+                <ScalarProperty Name="bcNameEn" ColumnName="bcNameEn" />
+                <ScalarProperty Name="bcName" ColumnName="bcName" />
+                <ScalarProperty Name="bcID" ColumnName="bcID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_BlogNcat">
+            <EntityTypeMapping TypeName="PortoModel.View_BlogNcat">
+              <MappingFragment StoreEntitySet="View_BlogNcat">
+                <ScalarProperty Name="bcNameEn" ColumnName="bcNameEn" />
+                <ScalarProperty Name="bcName" ColumnName="bcName" />
+                <ScalarProperty Name="tTitle" ColumnName="tTitle" />
+                <ScalarProperty Name="tPhoto" ColumnName="tPhoto" />
+                <ScalarProperty Name="tNameFamily" ColumnName="tNameFamily" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="bCreatedAt" ColumnName="bCreatedAt" />
+                <ScalarProperty Name="bMainPic" ColumnName="bMainPic" />
+                <ScalarProperty Name="bWriter" ColumnName="bWriter" />
+                <ScalarProperty Name="bKeywords" ColumnName="bKeywords" />
+                <ScalarProperty Name="bCategory" ColumnName="bCategory" />
+                <ScalarProperty Name="bContent" ColumnName="bContent" />
+                <ScalarProperty Name="bTitle" ColumnName="bTitle" />
+                <ScalarProperty Name="bName" ColumnName="bName" />
+                <ScalarProperty Name="bID" ColumnName="bID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

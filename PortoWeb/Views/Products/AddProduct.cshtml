@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">ایجاد نمونه کار جدید</h5>
+            <div class="text-right">
+                <a href="/products/productslist" class="btn btn-secondary">بازگشت</a>
+            </div>
+            <br />
+            <br />
+            <form id="editProductForm" enctype="multipart/form-data" method="POST">
+
+                <!-- Product Name -->
+                <div class="mb-3">
+                    <label for="productName" class="form-label">نام محصول :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="productName"
+                           name="productName"
+                           required
+                           maxlength="50"
+                           placeholder="حداکثر 50 کاراکتر">
+                    <div class="invalid-feedback">لطفاً نام محصول را وارد کنید (حداکثر 50 کاراکتر).</div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">توضیحات :</label>
+                    <textarea class="form-control"
+                              id="productDescription"
+                              name="productDescription"
+                              required
+                              maxlength="200"
+                              style="height: 100px;"
+                              placeholder="حداکثر 500 کاراکتر"></textarea>
+                    <div class="invalid-feedback">لطفاً توضیحات محصول را وارد کنید (حداکثر 500 کاراکتر).</div>
+                </div>
+
+                <!-- Client Name -->
+                <div class="mb-3">
+                    <label for="clientName" class="form-label">مشتری :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="clientName"
+                           name="clientName"
+                           maxlength="50"
+                           placeholder="حداکثر 50 کاراکتر">
+                    <div class="invalid-feedback">حداکثر طول نام مشتری 50 کاراکتر است.</div>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">دسته بندی :</label>
+                    <select class="form-select" id="category" name="categoryId">
+                        @foreach (var category in ViewBag.Category)
+                        {
+                            <option value="@category.cID">@category.Cname / @category.CnameEn</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Language -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">زبان :</label>
+                    <select class="form-select" id="lang" name="lang">
+                        <option value="fa">فارسی</option>
+                        <option value="en">انگلیسی</option>
+                    </select>
+                </div>
+
+                <h5 class="card-title text-center mt-4">آپلود عکس به پروژه</h5>
+
+                <!-- Main Photo Upload -->
+                <div class="mb-3">
+                    <label for="mainPhoto" class="form-label">عکس اصلی پروژه <span class="text-warning">فقط یک عکس*</span></label>
+                    <input type="file"
+                           class="form-control"
+                           id="mainPhoto"
+                           name="mainPhoto"
+                           accept="image/*"
+                           required>
+                    <div class="invalid-feedback">لطفاً یک عکس اصلی برای پروژه آپلود کنید. حداکثر حجم عکس 8 مگابایت میباشد.</div>
+                </div>
+
+                <!-- Additional Photos Upload -->
+                <div class="mb-3">
+                    <label for="additionalPhoto" class="form-label">عکس‌های دیگر <span class="text-warning">حداکثر 3 عکس*</span></label>
+                    <input type="file"
+                           class="form-control"
+                           id="additionalPhoto"
+                           name="additionalPhotos"
+                           accept="image/*"
+                           multiple>
+                    <div class="invalid-feedback">حداکثر تعداد عکس‌های آپلود شده 5 عکس میباشد و حداکثر حجم هر عکس 8 مگابایت میباشد.</div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="saveButton" class="btn btn-primary w-100">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Main Photo Validation
+            const mainPhotoInput = document.getElementById("mainPhoto");
+            const maxFileSize = 8 * 1024 * 1024; // 8MB
+
+            mainPhotoInput.addEventListener("change", function () {
+                const file = mainPhotoInput.files[0];
+                if (file && file.size > maxFileSize) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا',
+                        text: 'حجم عکس اصلی نمی‌تواند بیشتر از 8 مگابایت باشد.',
+                        confirmButtonText: 'باشه',
+                    }).then(() => {
+                        mainPhotoInput.value = ""; // Clear the input
+                    });
+                }
+            });
+
+            // Additional Photos Validation
+            const additionalPhotoInput = document.getElementById("additionalPhoto");
+            const maxFiles = 5;
+
+            additionalPhotoInput.addEventListener("change", function () {
+                const files = additionalPhotoInput.files;
+
+                if (files.length > maxFiles) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا',
+                        text: 'حداکثر تعداد عکس‌ها نمی‌تواند بیشتر از 5 باشد.',
+                        confirmButtonText: 'باشه',
+                    }).then(() => {
+                        additionalPhotoInput.value = ""; // Clear the input
+                    });
+                    return;
+                }
+
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > maxFileSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطا',
+                            text: `حجم عکس ${files[i].name} نمی‌تواند بیشتر از 8 مگابایت باشد.`,
+                            confirmButtonText: 'باشه',
+                        }).then(() => {
+                            additionalPhotoInput.value = ""; // Clear the input
+                        });
+                        break;
+                    }
+                }
+            });
+
+            // Form Submission
+            const form = document.getElementById("editProductForm");
+            const saveButton = document.getElementById("saveButton");
+
+            saveButton.addEventListener("click", function (event) {
+                showSpinner();
+                event.preventDefault(); // Prevent default form submission
+                const lang = $("#lang").val();
+                const formData = new FormData(form);
+
+                saveButton.disabled = true; // Disable button to prevent duplicate submissions
+
+                fetch("/Products/AddNewProduct", {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        saveButton.disabled = false;
+
+                        if (data.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'عملیات موفق',
+                                text: 'محصول با موفقیت ایجاد شد.',
+                                confirmButtonText: 'باشه',
+                            }).then(() => {
+                                let url = lang == "fa" ? "/Products/ProductsList" : "/Products/ProductsListEn";
+                                window.location.href = url;
+                            });
+                        } else {
+                            hideSpinner();
+                            saveButton.disabled = false;
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطا',
+                                text: data.message || 'ایجاد محصول با خطا مواجه شد.',
+                                confirmButtonText: 'باشه',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        hideSpinner();
+                        saveButton.disabled = false;
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطا',
+                            text: 'خطایی در ارتباط با سرور رخ داد.',
+                            confirmButtonText: 'باشه',
+                        });
+                    });
+            });
+
+        });
+    </script>
+
+}

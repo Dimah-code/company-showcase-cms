@@ -1,0 +1,163 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>بازیابی اطلاعات ادمین</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/Aassets/img/favicon.png" rel="icon">
+    <link href="~/Aassets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- ~/Aassets/vendor CSS Files -->
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <link href="~/Aassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="~/Aassets/css/Spinner.css" rel="stylesheet" />
+    <link href="~/Aassets/vendor/package/dist/sweetalert2.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="~/Aassets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Updated: Apr 20 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+    <!-- Spinner Overlay -->
+    <div id="spinner-overlay" style="display: none;">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+
+            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4">
+                                <a href="index.html" class="logo d-flex align-items-center w-auto">
+
+                                    <span class="d-none d-lg-block "> بازیابی اطلاعات ادمین </span>
+                                    <img src="~/Aassets/img/logo.png" alt="">
+                                </a>
+                            </div><!-- End Logo -->
+
+                            <div class="card mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">بازیابی نام کاربری و رمز عبور</h5>
+                                        <p class="text-center small">این بازیابی از طریق ایمیل شما که قبلا در قسمت توضیحات وارد کرده‌اید انجام میگیرد</p>
+                                    </div>
+
+                                    <div class="row g-3 needs-validation" novalidate>
+
+                                        <div class="col-12">
+                                            <label for="userEmail" class="form-label">ایمیل: </label>
+                                            <input type="email" name="userEmail" class="form-control" id="userEmail" dir="ltr">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button id="submit_btn" class="btn btn-danger w-100" type="button">ارسال به ایمیل</button>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="/Admin/LoginPage">بازگشت به صفحه لاگین</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+    <!-- ~/Aassets/vendor JS Files -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <script src="~/Aassets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/Aassets/vendor/package/dist/sweetalert2.min.js"></script>
+    <script src="~/Aassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Aassets/vendor/echarts/echarts.min.js"></script>
+    <script src="~/Aassets/vendor/quill/quill.js"></script>
+    <script src="~/Aassets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/Aassets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/Aassets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Aassets/js/Spinner.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Aassets/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Submit button click
+            $('#submit_btn').on('click', function () {
+                showSpinner();
+                let userEmail = $('#userEmail').val().trim();
+
+                // AJAX call if validation passes
+                $.ajax({
+                    url: '/Admin/RecoveryPost',
+                    type: 'POST',
+                    data: {
+                        userEmail: userEmail
+                    },
+                    success: function (response) {
+                        hideSpinner(); // Hide spinner before showing the alert
+
+                        Swal.fire({
+                            icon: response.success ? "success" : "error",
+                            title: response.success ? "عملیات موفق" : "عملیات ناموفق",
+                            text: response.message,
+                            confirmButtonText: 'باشه'
+                        });
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            icon: "error",
+                            title: "خطا",
+                            text: "مشکلی در سرور رخ داده است. لطفا دوباره تلاش کنید.",
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                });
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+﻿@*inja ye model table member bood *@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>کنترل پنل ادمین</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/Aassets/img/favicon.png" rel="icon">
+    <link href="~/Aassets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Aassets/vendor/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/Aassets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <link href="~/Aassets/vendor/package/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/Aassets/css/Spinner.css" rel="stylesheet" />
+    <!-- Template Main CSS File -->
+    <link href="~/Aassets/css/style.css" rel="stylesheet">
+</head>
+
+<body style="direction:rtl;">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <a href="/Admin/Dashboard" class="logo d-flex align-items-center">
+                <span class="d-none d-lg-block" id="LOGONAME">کنترل پنل ادمین</span>
+            </a>
+
+        </div><!-- End Logo -->
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+        @{
+            Html.RenderAction("_ProfileHeader", "Component");
+        }
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Admin/dashboard">
+                    <i class="bi bi-grid"></i>
+                    <span class="menu-right">داشبورد</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Products-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                    <i class="bi bi-boxes"></i><span>نمونه کارها</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Products-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="/Products/ProductsListEn">
+                            <i class="bi bi-circle"></i><span>پروژه های انگلیسی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Products/Productslist">
+                            <i class="bi bi-circle"></i><span>پروژه های فارسی</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Members-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                    <i class="bi bi-people"></i><span>اعضای شرکت</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Members-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="/Team/TeamListEn">
+                            <i class="bi bi-circle"></i><span>اعضا به انگلیسی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Team/Teamlist">
+                            <i class="bi bi-circle"></i><span>اعضا به فارسی</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Blogs-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                    <i class="bi bi-pen"></i><span>مدیریت بلاگ</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Blogs-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="/Blogs/BlogsListEn">
+                            <i class="bi bi-circle"></i><span>پست ها به انگلیسی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Blogs/BlogsList">
+                            <i class="bi bi-circle"></i><span>پست ها به فارسی</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Pages/PagesList">
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="menu-right">مدیریت صفحات</span>
+                </a>
+            </li><!-- End Pages Managment Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Messages/MessagesList">
+                    <i class="bi bi-chat"></i>
+                    <span class="menu-right">پیام ها</span>
+                </a>
+            </li><!-- End Message list Nav -->
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Admin/EditContext">
+                    <i class="bi bi-pencil"></i>
+                    <span class="menu-right">دیزاین سایت</span>
+                </a>
+            </li><!-- End Edit Context Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Home/Index">
+                    <i class="bi bi-arrow-left"></i>
+                    <span class="menu-right">ورود به سایت اصلی</span>
+                </a>
+            </li><!-- End Team Nav -->
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+        @RenderBody()
+    </main><!-- End #main -->
+    <!-- Spinner Overlay -->
+    <div id="spinner-overlay" style="display: none;">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="~/Aassets/js/Spinner.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Aassets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/Aassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Aassets/vendor/echarts/echarts.min.js"></script>
+    <script src="~/Aassets/vendor/quill/quill.js"></script>
+    <script src="~/Aassets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/Aassets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/assets/vendor/isotope/jquery.isotope.min.js"></script>
+    <script src="~/Aassets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Aassets/vendor/package/dist/sweetalert2.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    <!-- Template Main JS File -->
+    <script src="~/Aassets/js/main.js"></script>
+
+</body>
+
+</html>

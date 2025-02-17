@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+<section class="page-header page-header-modern page-header-background page-header-background-md overlay overlay-color-dark overlay-show overlay-op-7" style="background-image: url(~/assets/img/page-header/page-header-about-us.jpg);">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 align-self-center p-static order-2 text-center">
+                <h1 class="text-9 font-weight-bold">@ViewBag.nowPage</h1>
+
+                @{ 
+                        int id = ViewBag.id;
+                        var textId = "";
+                        switch (id)
+                        {
+                            case 1: textId = "text-22"; break;
+                            case 2: textId = "text-23"; break;
+                            case 3: textId = "text-24"; break;
+                            case 4: textId = "text-25"; break;
+                            case 5: textId = "text-26"; break;
+                        }
+                    }
+
+                <span class="sub-title editable" id="@textId">@ViewBag.slogan</span>
+            </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb breadcrumb-light d-block text-center">
+                        <li><a href="/Home/Index">@ViewBag.prevPage</a></li>
+                        <li class="active">@ViewBag.nowPage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>

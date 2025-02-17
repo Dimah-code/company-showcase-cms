@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PortoWeb.Models.View_ProjectList>
+
+@foreach (var item in Model)
+{
+    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+
+
+        <div class="portfolio-item">
+
+            <a href="/Home/ProjectDetail/@item.pID">
+
+                <span class="thumb-info thumb-info-lighten thumb-info-no-borders border-radius-0">
+
+                    <span class="thumb-info-wrapper border-radius-0">
+
+                        <img src="~/assets/img/projects/@item.pMainPic" class="img-fluid border-radius-0" alt="عکس نمونه کار @item.pName">
+
+                        <span class="thumb-info-title">
+
+                            <span class="thumb-info-inner"> @item.pName </span>
+
+                            <span class="thumb-info-type"> @item.Cname </span>
+
+                        </span>
+
+                        <span class="thumb-info-action">
+
+                            <span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+
+                        </span>
+
+                    </span>
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+}
+
+
+

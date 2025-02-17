@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "EditMember";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">ویرایش اطلاعات @ViewBag.member.tNameFamily</h5>
+            <div class="text-right">
+                <a href="/Team/TeamList" class="btn btn-secondary">بازگشت</a>
+            </div>
+            <br />
+            <br />
+            <form id="EditMemberForm" enctype="multipart/form-data" method="POST">
+
+                <!-- previous photo -->
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <label class="label-info">عکس فعلی</label>
+                        <img src="~/assets/img/team/@ViewBag.member.tPhoto" alt="عکس فعلی" class="rounded-circle" id="pImage" style="height:10rem;width:10rem">
+                    </div>
+                </div>
+                <!-- Member Name and family -->
+                <div class="mb-3">
+                    <label for="memberName" class="form-label">نام و نام‌خانوادگی :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="MemberName"
+                           name="memberName"
+                           value="@ViewBag.member.tNameFamily"
+                           required
+                           maxlength="60"
+                           placeholder="نام و نام‌خانوادگی را وارد کنید">
+                </div>
+
+                <!-- Upload Member Photo -->
+                <div class="mb-3">
+                    <label for="mainPhoto" class="form-label">بارگذاری عکس :</label>
+                    <input type="file"
+                           class="form-control"
+                           id="MemberPhoto"
+                           name="memberPhoto"
+                           accept="image/*">
+                </div>
+
+                <!-- preview photo -->
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img src="#" alt="Profile" class="rounded-circle" id="previewImage" style="height:10rem;width:10rem">
+                    </div>
+                </div>
+
+                <!-- Title Member -->
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">یک توضیح کوتاه :</label>
+                    <textarea class="form-control"
+                              id="MemberTitle"
+                              name="memberTitle"
+                              required
+                              maxlength="70"
+                              style="height: 89px;"
+                              placeholder="توضیحات کوتاه را وارد کنید. حداکثر 70 کاراکتر">@ViewBag.member.tTitle</textarea>
+                </div>
+
+                <!-- Description Member -->
+                <div class="mb-3">
+                    <label for="memberDes" class="form-label">توضیحات تکمیلی :</label>
+                    <textarea class="form-control"
+                              id="MemberDes"
+                              name="memberDes"
+                              required
+                              maxlength="400"
+                              style="height: 120px;"
+                              placeholder="توضیحات تکمیلی را وارد کنید. حداکثر 400 کاراکتر">@ViewBag.member.tDes</textarea>
+                </div>
+
+                <!-- Member Role select Option  -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">عنوان شغلی : <a href="/Team/Roles" class="small">مدیریت عناوین شغلی</a></label>
+                    <select class="form-select" id="MemberRole" name="memberRole">
+                        @foreach (var item in ViewBag.roles)
+                        {
+                            <option value="@item.rID" @(item.rID == ViewBag.member.fkRole ? "selected" : "")>
+                                @item.pkRole / @item.roleDes
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Language -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">زبان :</label>
+                    <select class="form-select" id="lang" name="lang">
+                        <option @(ViewBag.member.lang == "fa" ? "selected" : "") value="fa">فارسی</option>
+                        <option @(ViewBag.member.lang == "en" ? "selected" : "") value="en">انگلیسی</option>
+                    </select>
+                </div>
+
+
+                <!-- Skills -->
+                <div class="mb-3">
+                    <label for="Skill" class="form-label">4 مهارت برتر :</label>
+                    <input type="text"
+                           class="form-control"
+                           id="Skill1"
+                           name="skill1"
+                           maxlength="30"
+                           value="@ViewBag.member.tSkill1"
+                           placeholder="مهارت اول را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill2"
+                           name="skill2"
+                           maxlength="30"
+                           value="@ViewBag.member.tSkill2"
+                           placeholder="مهارت دوم را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill3"
+                           name="skill3"
+                           maxlength="30"
+                           value="@ViewBag.member.tSkill3"
+                           placeholder="مهارت سوم را وارد کنید">
+                    <input type="text"
+                           class="form-control"
+                           id="Skill4"
+                           name="skill4"
+                           maxlength="30"
+                           value="@ViewBag.member.tSkill4"
+                           placeholder="مهارت چهارم را وارد کنید">
+                </div>
+                <br />
+                <!-- Links -->
+                <p class="text-danger text-center">لینک هارا به صورت کامل وارد کنید <i class="bx bx-error"></i></p>
+                <div class="row mb-3">
+                    <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">لینک اینستاگرام</label>
+                    <div class="col-md-8 col-lg-9">
+                        <input name="memberInstagram" type="text" value="@ViewBag.member.tInstagram" class="form-control" id="Instagram" dir="ltr" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">لینک لینکدین</label>
+                    <div class="col-md-8 col-lg-9">
+                        <input name="memberLinkedin" type="text" value="@ViewBag.member.tLinkedin" class="form-control" id="Linkedin" dir="ltr" />
+                    </div>
+                </div>
+                <input type="text" name="memberId" value="@ViewBag.member.tID" style="display:none;" />
+                <br />
+                <!-- Save Button -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="SaveButton" class="btn btn-primary w-100">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        // JavaScript to show preview of uploaded image
+        const memberPhotoInput = document.getElementById("MemberPhoto");
+        const previewImage = document.getElementById("previewImage");
+
+        memberPhotoInput.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+
+            // Check if the file is an image
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                // On load, set the image source to the file and display it
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Hide the preview image if no valid image is selected
+                previewImage.style.display = "none";
+            }
+        });
+        $(document).ready(function () {
+            $("#EditMemberForm").on("submit", function (e) {
+                showSpinner();
+                e.preventDefault();
+                const lang = $("#lang").val();
+                let form = $("#EditMemberForm");
+                let formdata = new FormData(form[0]);
+                $.ajax({
+                    url: "/Team/EditMemberPost",
+                    type: "POST",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            hideSpinner();
+                            Swal.fire({
+                                title: "عملیات موفق",
+                                icon: "success",
+                                text: response.message,
+                                confirmButtonText: "باشه"
+                            }).then(() => {
+                                let url = lang == "fa" ? "/Team/TeamList" : "/Team/TeamListEn";
+                                window.location.href = url;
+                            });
+                        }
+                        else {
+                            hideSpinner();
+                            Swal.fire({
+                                title: "خطا",
+                                icon: "error",
+                                text: response.message,
+                                confirmButtonText: "باشه"
+                            });
+                        }
+                    },
+                    error: function () {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "خطا",
+                            icon: "error",
+                            text: "خطا در برقراری ارتباط با سرور",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+}

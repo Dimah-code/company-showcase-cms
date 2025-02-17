@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "ProductsList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-lg-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                <a href="/Products/AddProduct" class="btn btn-primary">ایجاد نمونه‌کار جدید</a>
+                <a href="/Products/Categories" class="btn btn-secondary">مدیریت دسته‌بندی‌ها</a>
+            </h5>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">شناسه</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">دسته بندی</th>
+                        <th scope="col">مشتری</th>
+                        <th scope="col">تاریخ</th>
+                        <th scope="col">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in ViewBag.products)
+                    {
+                        <tr>
+                            <td>@item.pID</td>
+                            <td>@item.pName</td>
+                            <td>@item.Cname</td>
+                            <td>@item.pClient</td>
+                            <td>@item.DoneDate</td>
+                              <td><a href="editProduct/@item.pID" class="btn btn-success">ویرایش</a>  
+                            <button onclick="confirmDelete(@item.pID)" class="btn btn-danger">حذف</button></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: "این عملیات قابل بازگشت نیست!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'باشه',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteProduct(id);
+                }
+            });
+        }
+        function deleteProduct(id) {
+            showSpinner();
+        fetch(`@Url.Action("DeleteProduct", "Products")`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                hideSpinner();
+                Swal.fire({
+                    title: "حذف شد!",
+                    text: "محصول با موفقیت حذف شد.",
+                    icon: "success",
+                    confirmButtonText: "باشه"
+                }).then(() => {
+                    location.reload(); // Reload the page to reflect changes
+                });
+            } else {
+                hideSpinner();
+                Swal.fire({
+                   icon: 'error',
+                   title: 'خطا!',
+                   text: data.message,
+                    confirmButtonText: "باشه",
+                });
+            }
+        }).catch(error => {
+                hideSpinner();
+                Swal.fire({
+                    title : 'خطا!',
+                    text : 'مشکلی در انجام عملیات وجود دارد.',
+                    icon: 'error',
+                    confirmButtonText: "باشه"
+            });
+            console.error('Error:', error);
+        });
+    }
+    </script>
+}

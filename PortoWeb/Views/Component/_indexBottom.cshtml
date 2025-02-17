@@ -1,0 +1,39 @@
+﻿ 
+@{
+    Layout = null;
+}
+@{
+    var lang = ViewBag.Language as string; // Get the language from the ViewBag
+    var texts = PortoWeb.Models.LanguageTexts.Texts[lang]; // Get texts for the selected language
+}
+<div class="container container-xl">
+    <div class="row justify-content-center featured-boxes featured-boxes-style-4 py-2 mb-4">
+        <div class="col-md-4">
+            <div class="featured-box featured-box-primary">
+                <div class="box-content appear-animation mb-n1" data-appear-animation="fadeInUp" data-appear-animation-delay="200">
+                    <i class="icon-featured icons icon-location-pin mb-3"></i>
+                    <span class="d-block opacity-7">@texts["Address"]</span>
+                    <h2 class="font-weight-bold text-color-dark text-5 mb-0 primary-font line-height-9 editable" id="text-20">@ViewBag.Address</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="featured-box featured-box-primary mx-5">
+                <div class="box-content appear-animation mb-n1" data-appear-animation="fadeInUp" data-appear-animation-delay="600">
+                    <i class="icon-featured icons icon-clock mb-3"></i>
+                    <span class="d-block opacity-7">@texts["Working Hours"]</span>
+                    <h2 class="font-weight-bold text-color-dark text-5 mb-0 primary-font line-height-9 editable" id="text-21">@ViewBag.WorkTime</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="featured-box featured-box-primary">
+                <div class="box-content appear-animation mb-n1" data-appear-animation="fadeInUp" data-appear-animation-delay="1000">
+                    <i class="icon-featured icons icon-call-in mb-3"></i>
+                    <span class="d-block opacity-7">@texts["Call Now"]</span>
+                    <h2 class="font-weight-bold text-color-dark text-5 mb-0 primary-font line-height-9"><span class="ltr-text">@Model.siteinfo.sitePhone</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

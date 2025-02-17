@@ -1,0 +1,97 @@
+﻿@using PortoWeb.Models
+@model GeneralViewModel
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = ViewBag.lang;
+    var texts = PortoWeb.Models.LanguageTexts.Texts[lang];
+}
+<div role="main" class="main">
+    @{
+        Html.RenderAction("_SubBanner", "Component", new { id = 3 });
+    }
+    <!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+
+    @Html.Raw(Model.siteinfo.googleMap)
+
+    <div class="container">
+
+        <div class="row py-4">
+            <div class="col-lg-6">
+
+                <div class="overflow-hidden mb-1">
+                    <h2 class="font-weight-normal text-7 mt-2 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200">
+                        <strong class="font-weight-extra-bold">
+                            @texts["Contact us"]
+                        </strong>
+                    </h2>
+                </div>
+
+                <form class="contact-form mb-5 mb-lg-0" id="MessageToAdminForm" method="POST">
+
+                    <div class="form-row">
+                        <div class="form-group col-lg-6">
+                            <label class="required font-weight-bold text-dark text-2">@texts["Name"]</label>
+                            <input type="text" value="" data-msg-required="@texts["Please Fill Name"]"
+                                   maxlength="99" class="form-control" name="userName" required>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label class="required font-weight-bold text-dark text-2">@texts["Phone"]</label>
+                            <input type="text" value="" data-msg-required="@texts["Please Fill Phone Number"]"
+                                   maxlength="20" class="form-control text-left" name="userPhone" dir="ltr" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label class="required font-weight-bold text-dark text-2">@texts["Message"]</label>
+                            <textarea maxlength="1200" data-msg-required="@texts["Please Fill The Message"]"
+                                      rows="8" class="form-control" name="userMessage" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="submit" value="@texts["Button Submit"]" class="btn btn-primary btn-modern" data-loading-text="@texts["On Loading"]">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-lg-6">
+
+                <div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="800">
+                    <h4 class="mt-2 mb-1"><strong>@texts["Address"]</strong></h4>
+                    <ul class="list list-icons list-icons-style-2 mt-2">
+                        <li class="line-height-9"><i class="fas fa-map-marker-alt top-6"></i>@ViewBag.address</li>
+                    </ul>
+                </div>
+
+                <div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="900">
+                    <h4 class="mt-2 mb-1"><strong>@texts["Call Now"]</strong></h4>
+                    <ul class="list list-icons list-icons-style-2 mt-2">
+                        <li class="line-height-9"><i class="fas fa-phone top-6"></i> <span class="ltr-text">@Model.siteinfo.sitePhone</span></li>
+                    </ul>
+                </div>
+
+                <div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="950">
+                    <h4 class="mt-2 mb-1"><strong>@texts["Company's Email"]</strong></h4>
+                    <ul class="list list-icons list-icons-style-2 mt-2">
+                        <li class="line-height-9"><i class="fas fa-envelope top-6"></i><a href="@Model.siteinfo.siteEmail">@Model.siteinfo.siteEmail</a></li>
+                    </ul>
+                </div>
+
+                <div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="950">
+                    <h4 class="pt-5"><strong>@texts["Working Hours"]</strong></h4>
+                    <ul class="list list-icons list-dark mt-2">
+                        <li><i class="far fa-clock top-6"></i> @ViewBag.timework</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section HomeScripts{
+    @Html.Partial("_SendMessageScript");
+}

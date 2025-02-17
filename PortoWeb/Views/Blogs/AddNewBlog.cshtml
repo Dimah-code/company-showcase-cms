@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "AddNewBlog";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">ایجاد بلاگ جدید</h5>
+        <a class="btn btn-secondary" href="/Blogs/Blogslist">برگشت</a>
+        <br />
+        <br />
+        <!-- Form for Blog Editing -->
+        <form id="AddNewBlogForm" enctype="multipart/form-data" method="post">
+
+            <!-- Blog Name -->
+            <div class="col-12">
+                <label for="blogName" class="form-label">نام بلاگ:</label>
+                <input type="text" class="form-control" id="blogName" name="bName" required>
+            </div>
+
+            <!-- Main Photo Upload -->
+            <div class="mb-3">
+                <label for="mainPhoto" class="form-label">عکس اصلی بلاگ:</label>
+                <input type="file" class="form-control" id="MainPhoto" name="mainPhoto" accept="image/*">
+            </div>
+
+            <!-- Additional Photos Upload -->
+            <div class="mb-3">
+                <label for="additionalPhoto" class="form-label">عکس‌های دیگر <span class="text-warning">حداکثر 3 عکس*</span></label>
+                <input type="file"
+                       class="form-control"
+                       id="AdditionalPhoto"
+                       name="additionalPhotos"
+                       accept="image/*"
+                       multiple>
+                <div class="invalid-feedback">حداکثر تعداد عکس‌های آپلود شده 5 عکس میباشد و حداکثر حجم هر عکس 8 مگابایت میباشد.</div>
+            </div>
+
+
+            <!-- Description -->
+            <div class="col-12">
+                <label for="blogDescription" class="form-label">توضیحات:</label>
+                <textarea class="form-control" id="blogDescription" name="bTitle" style="height: 100px;"></textarea>
+            </div>
+
+            <!-- Blog Content -->
+            <h5 class="card-title">محتوای بلاگ:</h5>
+            <div dir="rtl" id="editor-container" style="height: 300px;"></div>
+            <input type="hidden" id="blogContent" name="bContent" />
+
+            <!-- Keywords -->
+            <div class="col-12">
+                <label for="keywords" class="form-label">کلمات کلیدی:</label>
+                <input type="text" class="form-control" id="keywords" name="bKeywords">
+            </div>
+
+            @{
+                var c = ViewBag.categories;
+                var w = ViewBag.writers;
+            }
+
+
+            <!-- Category -->
+            <div class="col-12">
+                <label class="form-label">دسته‌بندی:</label>
+                <select class="form-select" name="bCategory">
+                    @foreach (var category in c)
+                    {
+                        <option value="@category.bcID">
+                            @category.bcName / @category.bcNameEn
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Writers -->
+            <div class="col-12">
+                <label class="form-label">نویسنده:</label>
+                <select class="form-select" name="bWriter">
+                    @foreach (var writer in w)
+                    {
+                        <option value="@writer.tID">
+                            @writer.tNameFamily
+                        </option>
+                    }
+                </select>
+            </div>
+            <br />
+            <!-- Language -->
+            <div class="mb-3">
+                <label for="category" class="form-label">زبان :</label>
+                <select class="form-select" id="language" name="language">
+                    <option value="fa">فارسی</option>
+                    <option value="en">انگلیسی</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="saveButton" class="btn btn-primary mt-3">ذخیره تغییرات</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Main Photo Validation
+            const mainPhotoInput = document.getElementById("MainPhoto");
+            const maxFileSize = 4 * 1024 * 1024; // 4MB
+
+            mainPhotoInput.addEventListener("change", function () {
+                const file = mainPhotoInput.files[0];
+                if (file && file.size > maxFileSize) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا',
+                        text: 'حجم عکس اصلی نمی‌تواند بیشتر از 4 مگابایت باشد.',
+                        confirmButtonText: 'باشه',
+                    }).then(() => {
+                        mainPhotoInput.value = ""; // Clear the input
+                    });
+                }
+            });
+
+            // Additional Photos Validation
+            const additionalPhotoInput = document.getElementById("AdditionalPhoto");
+            const maxFiles = 3;
+
+            additionalPhotoInput.addEventListener("change", function () {
+                const files = additionalPhotoInput.files;
+
+                if (files.length > maxFiles) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا',
+                        text: 'حداکثر تعداد عکس‌ها نمی‌تواند بیشتر از 3 باشد.',
+                        confirmButtonText: 'باشه',
+                    }).then(() => {
+                        additionalPhotoInput.value = ""; // Clear the input
+                    });
+                    return;
+                }
+
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > maxFileSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطا',
+                            text: `حجم عکس ${files[i].name} نمی‌تواند بیشتر از 4 مگابایت باشد.`,
+                            confirmButtonText: 'باشه',
+                        }).then(() => {
+                            additionalPhotoInput.value = ""; // Clear the input
+                        });
+                        break;
+                    }
+                }
+            });
+
+                // Ensure Quill is initialized first
+                const toolbarOptions = [
+                    ['bold', 'italic', 'underline', 'strike'], // Text styles
+                    ['blockquote', 'code-block'],             // Block quotes and code blocks
+                    [{ 'header': 1 }, { 'header': 2 }],       // Header levels
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
+                    [{ 'script': 'sub' }, { 'script': 'super' }],  // Subscript/Superscript
+                    [{ 'indent': '-1' }, { 'indent': '+1' }],  // Indent
+                    [{ 'direction': 'rtl' }],                // Text direction
+                    [{ 'size': ['small', false, 'large', 'huge'] }], // Font sizes
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }], // Header options
+                    [{ 'color': [] }, { 'background': [] }],  // Text and background colors
+                    [{ 'font': [] }],                         // Font family
+                    [{ 'align': [] }],                        // Alignments
+                    ['link'],                                 // Links
+                    ['clean']                                 // Remove formatting
+                ];
+
+                const quill = new Quill('#editor-container', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: toolbarOptions
+                    }
+                });
+
+                // Load existing content
+                const existingContent = $('#blogContent').val();
+                if (existingContent) {
+                    quill.root.innerHTML = existingContent;
+                }
+
+                // Form Submission
+                $('#AddNewBlogForm').on('submit', function (e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    // Use Quill's content in the hidden input
+                    const quillContent = quill.root.innerHTML;
+                    $('#blogContent').val(quillContent);
+                    const lang = $("#language").val();
+                    const formData = new FormData(this);
+                    showSpinner();
+                    $.ajax({
+                        url: '/Blogs/AddNewBlogPost',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            if (response.success) {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'عملیات موفق',
+                                    text: response.message,
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    let url = lang == "fa" ? "/Blogs/BlogsList" : "/Blogs/BlogsListEn";
+                                    window.location.href = url;
+                                });
+                            } else {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطا',
+                                    text: response.message,
+                                    confirmButtonText: 'باشه'
+                                });
+                            }
+                        },
+                        error: function () {
+                            hideSpinner();
+                            Swal.fire({
+                                icon: "error",
+                                title: 'خطا',
+                                text: 'خطایی در ارسال فرم رخ داده است.',
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    });
+                });
+        });
+    </script>
+}
+
+

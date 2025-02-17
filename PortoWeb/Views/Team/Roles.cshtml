@@ -1,0 +1,249 @@
+﻿@model List<PortoWeb.Models.RolesModel>
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                <a href="/Team/Teamlist" class="btn btn-secondary">بازگشت</a>
+                <button data-bs-toggle="modal" data-bs-target="#openAddNewModal" class="btn btn-primary">ایجاد عنوان شغلی جدید</button>
+            </h5>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">نام عنوان</th>
+                        <th scope="col">نام عنوان به انگلیسی</th>
+                        <th scope="col">ویرایش</th>
+                        <th scope="col">حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.roleID</td>
+                            <td>@item.roleName</td>
+                            <td>@item.roleDes</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal-@item.roleID">
+                                    ویرایش
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deleteRole(@item.roleID)" class="btn btn-danger">حذف</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="openAddNewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">اضافه کردن عنوان شغلی جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newRoleForm">
+                    <label for="newRoleVal" class="form-label">نام عنوان :</label>
+                    <input type="text" class="form-control" id="NewRoleVal" name="newRoleVal" required>
+                    <br />
+                    <label for="newRoleVal" class="form-label">نام عنوان به انگلیسی :</label>
+                    <input type="text" class="form-control" id="NewRoleValEn" name="newRoleVal" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" id="addNewRole">ثبت</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="editModal-@item.roleID" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ویرایش نام عنوان شغلی "@item.roleName"</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm-@item.roleID">
+                        <label for="roleName" class="form-label">نام عنوان شغلی :</label>
+                        <input type="text" id="RoleId" value="@item.roleID" style="display:none" />
+                        <input type="text" class="form-control" id="RoleName" name="roleName" value="@item.roleName" required>
+                        <br />
+                        <label for="roleName" class="form-label">نام عنوان شغلی به انگلیسی :</label>
+                        <input type="text" class="form-control" id="RoleNameEn" name="roleName" value="@item.roleDes" required>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                    <button type="button" class="btn btn-primary" id="EditRoleBtn">ذخیره</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        // Add role
+        $(document).on("click", "#addNewRole", function () {
+            showSpinner();
+            const RoleName = $("#NewRoleVal").val();
+            const RoleNameEn = $("#NewRoleValEn").val();
+            $.ajax({
+                url: "/Team/AddNewRole",
+                type: "POST",
+                data: { Role: RoleName, RoleEn: RoleNameEn },
+                success: function (response) {
+                    if (response.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            icon: "success",
+                            title: "عملیات موفق",
+                            text: response.message,
+                            confirmButtonText: 'باشه'
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        hideSpinner();
+                        Swal.fire({
+                            icon: "error",
+                            title: "عملیات ناموفق",
+                            text: response.message,
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                },
+                error: function () {
+                    hideSpinner();
+                    Swal.fire({
+                        icon: "error",
+                        title: "عملیات ناموفق",
+                        text: "خطا در برقراری ارتباط با سرور",
+                        confirmButtonText: 'باشه'
+                    });
+                }
+            });
+        });
+
+        // Edit Role
+
+        $(document).on("click", "#EditRoleBtn", function () {
+            showSpinner();
+            const id = $("#RoleId").val();
+            const roleName = $("#RoleName").val();
+            const roleNameEn = $("#RoleNameEn").val();
+
+            $.ajax({
+                url: `/Team/EditRole`,
+                type: "POST",
+                data: { id: id, roleName: roleName , roleNameEn: roleNameEn },
+                success: function (response) {
+                    if (response.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            icon: "success",
+                            title: "عملیات موفق",
+                            text: response.message,
+                            confirmButtonText: 'باشه'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        hideSpinner();
+                        Swal.fire({
+                            icon: "error",
+                            title: "عملیات ناموفق",
+                            text: response.message,
+                            confirmButtonText: 'باشه'
+                        });
+                    }
+                },
+                error: function () {
+                    hideSpinner();
+                    Swal.fire({
+                        icon: "error",
+                        title: "عملیات ناموفق",
+                        text: "خطا در برقراری ارتباط با سرور",
+                        confirmButtonText: 'باشه'
+                    });
+                }
+            });
+        });
+
+        // function Delete Role
+
+        function deleteRole(roleId) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: 'این عملیات غیرقابل بازگشت خواهد بود! و تمامی اعضای مرتبط حذف خواهند شد!!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSpinner();
+                    $.ajax({
+                        url: "/Team/DeleteRole",
+                        type: "POST",
+                        data: { id : roleId },
+                        success: function (response) {
+                            if (response.success) {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'حذف شد!',
+                                    text: response.message,
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: "عملیات ناموفق",
+                                    text: response.message || 'مشکلی رخ داده است.',
+                                    confirmButtonText: 'باشه'
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            hideSpinner();
+                            // Handle errors when AJAX fails
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطای سرور',
+                                text: 'درخواست شما با خطا مواجه شد. لطفاً دوباره امتحان کنید.' || jqXHR || textStatus || errorThrown,
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+
+
+}

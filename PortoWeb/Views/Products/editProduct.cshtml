@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Edit Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- Carousel Section -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">عکسهای محصول :</h5>
+
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Main Image -->
+                        <div class="carousel-item active">
+                            <img src="~/assets/img/projects/@ViewBag.product.pMainPic"
+                                 class="d-block w-100"
+                                 alt="@ViewBag.product.pName"
+                                 style="max-height: 400px; object-fit: cover;">
+                        </div>
+                        <!-- Additional Images -->
+                        @foreach (var photo in ViewBag.photo)
+                        {
+                            <div class="carousel-item">
+                                <img src="~/assets/img/projects/@photo.imageUrl"
+                                     class="d-block w-100"
+                                     alt="Additional Image"
+                                     style="max-height: 400px; object-fit: cover;">
+                            </div>
+                        }
+                    </div>
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">قبلی</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">بعدی</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Section -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">ویرایش اطلاعات محصول : "@ViewBag.product.pName"</h5>
+                <form id="editProductForm" enctype="multipart/form-data">
+                    <!-- Product Name -->
+                    <div class="col-12">
+                        <label for="productName" class="form-label">نام محصول</label>
+                        <input type="text" class="form-control" id="productName" name="ProductName" value="@ViewBag.product.pName" required>
+                    </div>
+                    <input type="text" name="id" value="@ViewBag.product.pID" style="display:none" />
+
+                    <!-- Description -->
+                    <div class="col-12">
+                        <label for="productDescription" class="form-label">توضیحات :</label>
+                        <textarea class="form-control" id="productDescription" name="ProductDescription" style="height: 100px;">@ViewBag.product.pDes</textarea>
+                    </div>
+
+                    <!-- Client Name -->
+                    <div class="col-12">
+                        <label for="clientName" class="form-label">مشتری :</label>
+                        <input type="text" class="form-control" id="clientName" name="ClientName" value="@ViewBag.product.pClient">
+                    </div>
+
+                    <!-- Category -->
+                    <div class="col-12">
+                        <label class="form-label">دسته بندی :</label>
+                        <select class="form-select" name="CategoryId">
+                            @foreach (var category in ViewBag.category)
+                            {
+                                <option value="@category.cID" @(category.cID == ViewBag.product.pCategory ? "selected" : "")>
+                                    @category.Cname / @category.CnameEn
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Language -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label">زبان :</label>
+                        <select class="form-select" id="lang" name="lang">
+                            <option @(ViewBag.product.lang == "fa" ? "selected" : "") value="fa">فارسی</option>
+                            <option @(ViewBag.product.lang == "en" ? "selected" : "") value="en">انگلیسی</option>
+                        </select>
+                    </div>
+
+                    <h5 class="card-title">آپلود عکس به پروژه :</h5>
+
+                    <!-- Main Photo Upload -->
+                    <div class="mb-3">
+                        <label for="mainPhoto" class="form-label">عکس اصلی پروژه :</label>
+                        <input type="file" class="form-control" id="mainPhoto" name="MainPhoto" accept="image/*">
+                    </div>
+
+                    <!-- Additional Photos Upload -->
+                    <div class="mb-3">
+                        <label for="additionalPhoto" class="form-label">عکس های دیگر :</label>
+                        <input type="file" class="form-control" id="additionalPhoto" name="AdditionalPhotos" accept="image/*" multiple>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- Buttons -->
+<div class="text-center">
+    <button type="button" id="saveButton" class="btn btn-primary btn-lg">ذخیره</button>
+    <a href="/Products/ProductsList" class="btn btn-secondary btn-lg">بازگشت</a>
+</div>
+@section Scripts {
+    <script>
+        document.getElementById("saveButton").addEventListener("click", function () {
+            showSpinner();
+            var form = document.getElementById("editProductForm");
+            var formData = new FormData(form);
+            const lang = $("#lang").val();
+            fetch("/Products/EditProduct", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "عملیات موفقیت‌آمیز بود",
+                            text: "مقادیر مورد نطر با موفقیت ویرایش شد",
+                            icon: "success",
+                            confirmButtonText: "باشه"
+                        }).then(() => {
+                            let url = lang == "fa" ? "/Products/ProductsList" : "/Products/ProductsListEn";
+                            window.location.href = url;
+                        });
+                    } else {
+                        hideSpinner();
+                        Swal.fire({
+                            title: "خطا",
+                            text: data.message || "خطایی رخ داده است",
+                            icon: "error",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                })
+                .catch(error => {
+                    hideSpinner();
+                    Swal.fire({
+                        title: "خطا",
+                        text: "خطا در بروزرسانی اطلاعات",
+                        icon: "error",
+                        confirmButtonText: "باشه"
+                    });
+                });
+
+        });
+
+    </script>
+}

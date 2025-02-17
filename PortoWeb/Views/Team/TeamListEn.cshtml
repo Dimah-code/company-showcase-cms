@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "TeamList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-lg-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                <a href="/Team/AddMember" class="btn btn-primary">افزودن عضو</a>
+                <a href="/team/roles" class="btn btn-secondary">مدیریت عناوین شغلی</a>
+            </h5>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">نام عضو</th>
+                        <th scope="col">عنوان شغلی</th>
+                        <th scope="col">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in ViewBag.team)
+                    {
+                        <tr>
+                            <td>@item.tID</td>
+                            <td>@item.tNameFamily</td>
+                            <td>@item.roleDes</td>
+                            <td>
+                                <a href="/Team/EditMember/@item.tID" class="btn btn-success">ویرایش</a>
+                                <button onclick="deleteMember(@item.tID)" class="btn btn-danger">حذف</button>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+        function deleteMember(memberId) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: 'این عملیات غیرقابل بازگشت خواهد بود! شما در حال حذف کردن یکی از اعضای خود هستید!!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSpinner();
+                    $.ajax({
+                        url: "/Team/DeleteMember",
+                        type: "POST",
+                        data: { id: memberId },
+                        success: function (response) {
+                            if (response.success) {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'حذف شد!',
+                                    text: 'عضو با موفقیت حذف شد.',
+                                    confirmButtonText: 'باشه'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                hideSpinner();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطا در حذف عضو',
+                                    text: response.message || 'مشکلی رخ داده است.',
+                                    confirmButtonText: 'باشه'
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            hideSpinner();
+                            // Handle errors when AJAX fails
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطای سرور',
+                                text: 'درخواست شما با خطا مواجه شد. لطفاً دوباره امتحان کنید.' || jqXHR || textStatus || errorThrown,
+                                confirmButtonText: 'باشه'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}

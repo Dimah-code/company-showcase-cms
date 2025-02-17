@@ -1,0 +1,88 @@
+﻿@model PortoWeb.Models.GeneralViewModel
+@{
+    ViewBag.Title = "TeamDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = ViewBag.lang;
+    var texts = PortoWeb.Models.LanguageTexts.Texts[lang];
+}
+
+<div role="main" class="main">
+    <section class="page-header page-header-modern page-header-background page-header-background-md overlay overlay-color-dark overlay-show overlay-op-7" style="background-image: url(~/assets/img/page-header/page-header-about-us.jpg);">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="text-9 font-weight-bold">@Model.thisteam.tNameFamily</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container pt-5">
+
+        <div class="row py-4 mb-2">
+            <div class="col-md-7 order-2">
+                <div class="overflow-hidden">
+                    <h2 class="text-color-dark font-weight-bold text-8 mb-1 pt-0 mt-0 appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="300" style="animation-delay: 300ms;">@Model.thisteam.tNameFamily</h2>
+                </div>
+                <div class="overflow-hidden mb-3">
+                    <p class="font-weight-bold text-primary text-uppercase mb-0 appear-animation text-3 animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="500" style="animation-delay: 500ms;">@(lang == "fa" ? Model.thisteam.pkRole : Model.thisteam.roleDes)</p>
+                </div>
+
+                <p class="pb-3 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="800" style="animation-delay: 800ms;">@Model.thisteam.tDes</p>
+                <hr class="solid my-4 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="900" style="animation-delay: 900ms;">
+                <div class="row align-items-center appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1000" style="animation-delay: 1000ms;">
+                   
+                    <div class="col-sm-6 text-lg-right my-4 my-lg-0">
+                        <strong class="text-uppercase text-2 mr-3 text-dark">@texts["Follow me"]</strong>
+                        <ul class="social-icons float-lg-right mt-2 mt-lg-0">
+                            <li class="social-icons-instagram"><a href="@Model.thisteam.tInstagram" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                            <li class="social-icons-linkedin"><a href="@Model.thisteam.tLinkedin" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 order-md-2 mb-4 mb-lg-0 appear-animation animated fadeInRightShorter appear-animation-visible" data-appear-animation="fadeInRightShorter" style="animation-delay: 100ms;">
+                <img src="~/assets/img/team/@Model.thisteam.tPhoto" class="img-fluid mb-2" alt="عکس عضو تیم : @Model.thisteam.tNameFamily">
+            </div>
+        </div>
+    </div>
+
+    <section class="section section-default border-0 mt-5 appear-animation animated fadeIn appear-animation-visible" data-appear-animation="fadeIn" data-appear-animation-delay="1200" style="animation-delay: 1200ms;">
+        <div class="container py-2">
+
+            <div class="row featured-boxes featured-boxes-style-4">
+                <div class="col-md-6 col-lg-3 my-4">
+                    <div class="m-0 featured-box featured-box-primary featured-box-effect-4 appear-animation animated fadeInLeftShorter appear-animation-visible" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="1600" style="animation-delay: 1600ms;">
+                        <div class="box-content p-0 text-left">
+                            <i class="icon-featured icon-screen-tablet icons text-12 m-0 p-0"></i>
+                            <h4 class="font-weight-bold text-color-dark mt-2">@Model.thisteam.tSkill1</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 my-4">
+                    <div class="m-0 featured-box featured-box-primary featured-box-effect-4 appear-animation animated fadeInLeftShorter appear-animation-visible" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="1400" style="animation-delay: 1400ms;">
+                        <div class="box-content p-0 text-left">
+                            <i class="icon-featured icon-layers icons text-12 m-0 p-0"></i>
+                            <h4 class="font-weight-bold text-color-dark mt-2">@Model.thisteam.tSkill2</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 my-4">
+                    <div class="m-0 featured-box featured-box-primary featured-box-effect-4 appear-animation animated fadeInRightShorter appear-animation-visible" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1400" style="animation-delay: 1400ms;">
+                        <div class="box-content p-0 text-left">
+                            <i class="icon-featured icon-magnifier icons text-12 m-0 p-0"></i>
+                            <h4 class="font-weight-bold text-color-dark mt-2">@Model.thisteam.tSkill3</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 my-4">
+                    <div class="m-0 featured-box featured-box-primary featured-box-effect-4 appear-animation animated fadeInRightShorter appear-animation-visible" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1600" style="animation-delay: 1600ms;">
+                        <div class="box-content p-0 text-left">
+                            <i class="icon-featured icon-screen-tablet icons text-12 m-0 p-0"></i>
+                            <h4 class="font-weight-bold text-color-dark mt-2">@Model.thisteam.tSkill4</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
