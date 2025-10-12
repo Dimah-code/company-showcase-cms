@@ -7,6 +7,8 @@ using Hangfire;
 using System.Linq;
 using Hangfire.SqlServer;
 using PortoWeb.Controllers;
+using PortoWeb.Models;
+using System.Data.Entity;
 
 namespace PortoWeb
 {

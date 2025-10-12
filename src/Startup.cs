@@ -15,7 +15,7 @@ namespace PortoWeb
         [Obsolete]
         public void Configuration(IAppBuilder app)
         {
-            string sqlServerConnectionString = "data source=zeusshoes.shop;initial catalog=23974_Porto;persist security info=True;user id=23974;password=d@14QeYNgvjvXR#y;MultipleActiveResultSets=True;";
+            string sqlServerConnectionString = "Data Source=localhost;Initial Catalog=23974_Porto;Integrated Security=True;TrustServerCertificate=True;";
             GlobalConfiguration.Configuration.UseSqlServerStorage(sqlServerConnectionString);
 
             // Hangfire Dashboard with restricted access
