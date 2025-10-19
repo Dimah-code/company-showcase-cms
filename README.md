@@ -78,7 +78,6 @@ Users can also send messages directly from the main website, which are displayed
 
 ### Built With
 
-### 🛠️ Built With
 ### 🧩 Technologies & Tools Used
 
 #### 🖥️ Backend
