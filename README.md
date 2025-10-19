@@ -13,7 +13,7 @@
 <div align="center">
   <a href="https://github.com/Dimah-code/company-showcase-cms">
 
-  ![Porto Logo](src/assets/img/gallery/logo-corporate-4.png)
+  ![Porto Logo](src/Assets/img/gallery/logo-corporate-4.png)
 
   </a>
 
