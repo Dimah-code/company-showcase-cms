@@ -67,7 +67,7 @@ namespace PortoWeb.Controllers
                     return Json(new { success = false, message = "عکس انتخاب شده بیشتر از 4 مگابایت است" });
                 }
                 var uniqeName = GenerateUniqueFileName(memberPhoto.FileName);
-                var path = Path.Combine(Server.MapPath("~/assets/img/team/"), uniqeName);
+                var path = Path.Combine(Server.MapPath("~/Assets/img/team/"), uniqeName);
                 memberPhoto.SaveAs(path);
 
 
@@ -98,8 +98,8 @@ namespace PortoWeb.Controllers
         {
             try
             {
-                string blogFolderPath = Server.MapPath("~/assets/img/blog");
-                string imageFolderPath = Server.MapPath("~/assets/img/team");
+                string blogFolderPath = Server.MapPath("~/Assets/img/blog");
+                string imageFolderPath = Server.MapPath("~/Assets/img/team");
                 var res = service.DeleteMember(id, imageFolderPath, blogFolderPath);
                 return Json(new { success = res.Success, message = res.Message });
             }
@@ -159,7 +159,7 @@ namespace PortoWeb.Controllers
                     if (memberPhoto != null)
                     {
                         // delete that old photo from files
-                        var oldPhotoPath = Path.Combine(Server.MapPath("~/assets/img/team"), member.tPhoto);
+                        var oldPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/team"), member.tPhoto);
                         if (System.IO.File.Exists(oldPhotoPath))
                         {
                             System.IO.File.Delete(oldPhotoPath);
@@ -173,7 +173,7 @@ namespace PortoWeb.Controllers
                         }
                         // uploading new file
                         var uniqueName = GenerateUniqueFileName(memberPhoto.FileName);
-                        var path = Path.Combine(Server.MapPath("~/assets/img/team"), uniqueName);
+                        var path = Path.Combine(Server.MapPath("~/Assets/img/team"), uniqueName);
                         // save new photo in files
                         memberPhoto.SaveAs(path);
                         // set in database
@@ -260,8 +260,8 @@ namespace PortoWeb.Controllers
             try
             {
                 var response = new Response();
-                string teamImagePath = Server.MapPath("~/assets/img/team");
-                string blogImagesPath = Server.MapPath("~/assets/img/blog");
+                string teamImagePath = Server.MapPath("~/Assets/img/team");
+                string blogImagesPath = Server.MapPath("~/Assets/img/blog");
                 var res = service.DeleteRole(id, teamImagePath, blogImagesPath);
                 return Json(new { success = res.Success, message = res.Message });
             }

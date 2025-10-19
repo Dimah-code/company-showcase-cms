@@ -223,7 +223,7 @@ namespace PortoWeb.Controllers
         [HttpPost]
         public ActionResult SetImage(string elementId ,string imageAlt, HttpPostedFileBase image)
         {
-            string path = Server.MapPath("~/assets/img/gallery");
+            string path = Server.MapPath("~/Assets/img/gallery");
             var parts = elementId.Split('-');
             if (parts.Length < 2 || !int.TryParse(parts[1], out int ID))
                 return Json(new { success = false });

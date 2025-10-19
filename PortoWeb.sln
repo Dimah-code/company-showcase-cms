@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortoWeb", "PortoWeb\PortoWeb.csproj", "{7B2D785F-E499-4AF8-B2D1-03E1773002AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortoWeb", "src\PortoWeb.csproj", "{7B2D785F-E499-4AF8-B2D1-03E1773002AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

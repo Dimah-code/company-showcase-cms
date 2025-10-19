@@ -79,7 +79,7 @@ namespace PortoWeb.Controllers
                 string uniqueName = GenerateUniqueFileName(MainPhoto.FileName);
 
                 // Combine the unique file name with the save directory path
-                string mainPhotoPath = Path.Combine(Server.MapPath("~/assets/img/projects"), uniqueName);
+                string mainPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/projects"), uniqueName);
 
                 // Save the new main photo
                 MainPhoto.SaveAs(mainPhotoPath);
@@ -88,7 +88,7 @@ namespace PortoWeb.Controllers
                 if (!string.IsNullOrEmpty(product.pMainPic))
                 {
                    
-                    string oldMainPhotoPath = Path.Combine(Server.MapPath("~/assets/img/projects/"),product.pMainPic);
+                    string oldMainPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"),product.pMainPic);
 
                     if (System.IO.File.Exists(oldMainPhotoPath))
                     {
@@ -110,7 +110,7 @@ namespace PortoWeb.Controllers
                 foreach (var oldPhoto in oldPhotos)
                 {
                     // Find image path for delete it
-                    string oldPhotoPath = Path.Combine(Server.MapPath("~/assets/img/projects/"),oldPhoto.imageUrl);
+                    string oldPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"),oldPhoto.imageUrl);
 
                     if (System.IO.File.Exists(oldPhotoPath))
                     {
@@ -123,7 +123,7 @@ namespace PortoWeb.Controllers
                 {
                     // create image path for save it
                     string uniqueName = GenerateUniqueFileName(photo.FileName);
-                    string photoPath = Path.Combine(Server.MapPath("~/assets/img/projects/"), uniqueName);
+                    string photoPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), uniqueName);
                     photo.SaveAs(photoPath);
 
                     context.Table_ProjectImage.Add(new Table_ProjectImage
@@ -144,14 +144,14 @@ namespace PortoWeb.Controllers
         {
             var product = context.Table_Projects.Find(id);
             var relatedPhotos = context.Table_ProjectImage.Where(r => r.projectID == id).ToList();
-            var mainPicPath = Path.Combine(Server.MapPath("~/assets/img/projects/"), product.pMainPic);
+            var mainPicPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), product.pMainPic);
             if (System.IO.File.Exists(mainPicPath))
             {
                 System.IO.File.Delete(mainPicPath);
             }
             foreach(var item in relatedPhotos)
             {
-                var imagePath = Path.Combine(Server.MapPath("~/assets/img/projects/"), item.imageUrl);
+                var imagePath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), item.imageUrl);
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);
@@ -211,7 +211,7 @@ namespace PortoWeb.Controllers
 
                 // Save Main Photo
                 var mainPhotoName = GenerateUniqueFileName(mainPhoto.FileName);
-                var mainPhotoPath = Path.Combine(Server.MapPath("~/assets/img/projects/"), mainPhotoName);
+                var mainPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), mainPhotoName);
                 mainPhoto.SaveAs(mainPhotoPath);
 
 
@@ -239,7 +239,7 @@ namespace PortoWeb.Controllers
                     foreach (var photo in additionalPhotos)
                     {
                         var additionalPhotoName = GenerateUniqueFileName(photo.FileName);
-                        var additionalPhotoPath = Path.Combine(Server.MapPath("~/assets/img/projects/"), additionalPhotoName);
+                        var additionalPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), additionalPhotoName);
                         photo.SaveAs(additionalPhotoPath);
 
                         var projectImage = new Table_ProjectImage
@@ -318,14 +318,14 @@ namespace PortoWeb.Controllers
                     var images = context.Table_ProjectImage.Where(i => i.projectID == product.pID).ToList();
                     foreach(var image in images)
                     {
-                        var imagePath = Path.Combine(Server.MapPath("~/assets/img/projects/"), image.imageUrl);
+                        var imagePath = Path.Combine(Server.MapPath("~/Assets/img/projects/"), image.imageUrl);
                         if (System.IO.File.Exists(imagePath))
                         {
                             System.IO.File.Delete(imagePath);
                         }
                     }
                     context.Table_ProjectImage.RemoveRange(images);
-                    var mainImagePath = Path.Combine(Server.MapPath("~/assets/img/projects"), product.pMainPic);
+                    var mainImagePath = Path.Combine(Server.MapPath("~/Assets/img/projects"), product.pMainPic);
                     if (System.IO.File.Exists(mainImagePath))
                     {
                         System.IO.File.Delete(mainImagePath);

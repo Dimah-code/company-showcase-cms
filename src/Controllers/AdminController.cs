@@ -147,8 +147,8 @@ namespace PortoWeb.Controllers
                     {
                         var fileExtension = Path.GetExtension(ProfilePic.FileName);
                         var customFileName = $"Profile_{adminInfo.MID}_{DateTime.Now.ToString("yyyyMMddHHmmss")}{fileExtension}";
-                        var path = Path.Combine(Server.MapPath("~/Aassets/img/AdminProfile"), customFileName);
-                        var oldpath = Path.Combine(Server.MapPath("~/Aassets/img/AdminProfile"), adminInfo.Mpic);
+                        var path = Path.Combine(Server.MapPath("~/Admin_assets/img/AdminProfile"), customFileName);
+                        var oldpath = Path.Combine(Server.MapPath("~/Admin_assets/img/AdminProfile"), adminInfo.Mpic);
                         if (System.IO.File.Exists(oldpath))
                         {
                             System.IO.File.Delete(oldpath);
@@ -215,7 +215,7 @@ namespace PortoWeb.Controllers
                 }
                 
                 // Save file
-                string path = Path.Combine(Server.MapPath("~/assets/img/icons"), uniqefilename);
+                string path = Path.Combine(Server.MapPath("~/Assets/img/icons"), uniqefilename);
                 siteLogo.SaveAs(path);
                 main.siteLogo = uniqefilename;
             }
