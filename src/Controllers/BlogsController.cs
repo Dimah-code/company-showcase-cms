@@ -92,13 +92,13 @@ namespace PortoWeb.Controllers
                 blog.bWriter = model.bWriter;
                 if (model.mainPhoto != null)
                 {
-                    var oldMainPhoto = Path.Combine(Server.MapPath("~/Assets/img/blog"), blog.bMainPic);
+                    var oldMainPhoto = Path.Combine(Server.MapPath("~/assets/img/blog"), blog.bMainPic);
                     if (System.IO.File.Exists(oldMainPhoto))
                     {
                         System.IO.File.Delete(oldMainPhoto);
                     }
                     var newPhotoName = GenerateUniqueFileName(model.mainPhoto.FileName);
-                    var newPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/blog"), newPhotoName);
+                    var newPhotoPath = Path.Combine(Server.MapPath("~/assets/img/blog"), newPhotoName);
                     model.mainPhoto.SaveAs(newPhotoPath);
                     blog.bMainPic = newPhotoName;
                 }
@@ -111,7 +111,7 @@ namespace PortoWeb.Controllers
                     var oldImages = context.Table_BlogImages.Where(i => i.blogID == blog.bID).ToList();
                     foreach (var image in oldImages)
                     {
-                        var imagePath = Path.Combine(Server.MapPath("~/Assets/img/blog"), image.bpUrl);
+                        var imagePath = Path.Combine(Server.MapPath("~/assets/img/blog"), image.bpUrl);
                         if (System.IO.File.Exists(imagePath))
                         {
                             System.IO.File.Delete(imagePath);
@@ -122,7 +122,7 @@ namespace PortoWeb.Controllers
                     foreach (var image in newImages)
                     {
                         var uniqueName = GenerateUniqueFileName(image.FileName);
-                        var imagePath = Path.Combine(Server.MapPath("~/Assets/img/blog"), uniqueName);
+                        var imagePath = Path.Combine(Server.MapPath("~/assets/img/blog"), uniqueName);
                         image.SaveAs(imagePath);
                         Table_BlogImages newBlogImages = new Table_BlogImages
                         {
@@ -146,7 +146,7 @@ namespace PortoWeb.Controllers
         {
             try
             {
-                string folderPath = Server.MapPath("~/Assets/img/blog");
+                string folderPath = Server.MapPath("~/assets/img/blog");
                 var response = service.DeleteBlogWithImages(id, folderPath);
                 return Json(new { success = response.Success, message = response.Message });
             }
@@ -182,7 +182,7 @@ namespace PortoWeb.Controllers
                     if (model.mainPhoto != null)
                     {
                         var mainPhotoName = GenerateUniqueFileName(model.mainPhoto.FileName);
-                        var mainPhotoPath = Path.Combine(Server.MapPath("~/Assets/img/blog"), mainPhotoName);
+                        var mainPhotoPath = Path.Combine(Server.MapPath("~/assets/img/blog"), mainPhotoName);
                         model.mainPhoto.SaveAs(mainPhotoPath);
 
 
@@ -210,7 +210,7 @@ namespace PortoWeb.Controllers
                             foreach (var image in model.additionalPhotos)
                             {
                                 var imageUniqueName = GenerateUniqueFileName(image.FileName);
-                                var imagePath = Path.Combine(Server.MapPath("~/Assets/img/blog"), imageUniqueName);
+                                var imagePath = Path.Combine(Server.MapPath("~/assets/img/blog"), imageUniqueName);
                                 image.SaveAs(imagePath);
                                 Table_BlogImages newImages = new Table_BlogImages
                                 {
@@ -308,7 +308,7 @@ namespace PortoWeb.Controllers
             {
                 try
                 {
-                    string folderPath = Server.MapPath("~/Assets/img/blog");
+                    string folderPath = Server.MapPath("~/assets/img/blog");
                     var response = service.DeleteCategory(categoryId, folderPath);
                     return Json(new { success = response.Success, message = response.Message });
                 }

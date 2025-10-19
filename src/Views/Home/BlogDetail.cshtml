@@ -8,7 +8,7 @@
 }
 <div role="main" class="main">
 
-    <section class="page-header page-header-modern page-header-background page-header-background-md overlay overlay-color-dark overlay-show overlay-op-7" style="background-image: url(~/Assets/img/page-header/page-header-about-us.jpg);">
+    <section class="page-header page-header-modern page-header-background page-header-background-md overlay overlay-color-dark overlay-show overlay-op-7" style="background-image: url(~/assets/img/page-header/page-header-about-us.jpg);">
         <div class="container">
             <div class="row mt-5">
                 <div class="col-md-12 align-self-center p-static order-2 text-center">
@@ -32,10 +32,10 @@
                                     @foreach (var item in Model.blogImages)
                                     {
                                         <div class="col-6 col-md-4 p-0">
-                                            <a href="~/Assets/img/blog/@item.bpUrl">
+                                            <a href="~/assets/img/blog/@item.bpUrl">
                                                 <span class="thumb-info thumb-info-no-borders thumb-info-centered-icons">
                                                     <span class="thumb-info-wrapper">
-                                                        <img src="~/Assets/img/blog/@item.bpUrl" class="img-fluid" alt="عکس از بلاگ @Model.blogDetail.bName">
+                                                        <img src="~/assets/img/blog/@item.bpUrl" class="img-fluid" alt="عکس از بلاگ @Model.blogDetail.bName">
                                                         <span class="thumb-info-action">
                                                             <span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fas fa-plus text-dark"></i></span>
                                                         </span>
@@ -82,7 +82,7 @@
                                 <h4 class="mb-3 secondary-font pb-1">@texts["Writer"]</h4>
                                 <div class="img-thumbnail img-thumbnail-no-borders d-block pb-3">
                                     <a href="blog-post.html">
-                                        <img src="~/Assets/img/team/@Model.blogDetail.tPhoto" alt="عکس نویسنده بلاگ : @Model.blogDetail.tNameFamily">
+                                        <img src="~/assets/img/team/@Model.blogDetail.tPhoto" alt="عکس نویسنده بلاگ : @Model.blogDetail.tNameFamily">
                                     </a>
                                 </div>
                                 <p><strong class="name"><a href="#" class="text-4 pb-1 d-block">@Model.blogDetail.tNameFamily</a></strong></p>
@@ -108,7 +108,7 @@
                             <a href="/Home/BlogDetail/@item.bID">
                                 <span class="thumb-info thumb-info-lighten thumb-info-no-borders border-radius-0">
                                     <span class="thumb-info-wrapper border-radius-0">
-                                        <img src="~/Assets/img/blog/@item.bMainPic" class="img-fluid border-radius-0" alt="عکس اصلی بلاگ @item.bName">
+                                        <img src="~/assets/img/blog/@item.bMainPic" class="img-fluid border-radius-0" alt="عکس اصلی بلاگ @item.bName">
                                         <span class="thumb-info-title">
                                             <span class="thumb-info-inner">@item.bName</span>
                                             <span class="thumb-info-type">@(lang == "fa" ? item.bcName : item.bcNameEn)</span>
