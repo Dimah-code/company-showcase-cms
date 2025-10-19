@@ -12,7 +12,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/Dimah-code/company-showcase-cms">
-    <img src="src/assets/img/gallery/logo-corporate-4.png" alt="Logo" >
+
+  ![Porto Logo](src/assets/img/gallery/logo-corporate-4.png)
+
   </a>
 
 <h3 align="center">A Modern ASP.NET Company Website with Admin Panel</h3>
